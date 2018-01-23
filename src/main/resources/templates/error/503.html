@@ -1,0 +1,72 @@
+<%-- 
+    Document   : 503
+    Created on : 20/11/2017, 02:04:17 PM
+    Author     : Alfonso
+--%>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Guissa   |   503</title>
+        <link rel="shortcut icon" href="<%= request.getContextPath() %>/images/favicon.ico" />
+        <meta name="msapplication-TileColor" content="#5bc0de" />
+        <link href="<%= request.getContextPath() %>/cliente/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="<%= request.getContextPath() %>/cliente/css/animate.min.css" rel="stylesheet"/>
+        <link href="<%= request.getContextPath() %>/administrador/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            body.error {
+                padding-top: 40px;
+                background: url("<%= request.getContextPath() %>/images/always_grey.png") repeat rgba(68, 68, 68, 0.9);
+              }
+              body.error .logo h1 {
+                color: #FFFFFF;
+                font-size: 100px;
+                text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #C9C9C9, 0 3px 0 #BBBBBB, 0 4px 0 #B9B9B9, 0 5px 0 #AAAAAA, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+              }
+              @media (max-width: 767px) {
+                body.error .logo h1 {
+                  font-size: 60px;
+                }
+              }
+        </style>
+    </head>
+    <body class="error">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div class="logo">
+                    <h1>503</h1>
+                </div>
+                <p class="lead text-muted">Oops, ocurrió un error. Servicio inaccesible!</p>
+                <div class="clearfix"></div>
+                <div class="col-lg-6 col-lg-offset-3">
+                    <form action="index.html">
+                        <div class="input-group">
+                            <input type="text" placeholder="Buscar ..." class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+                <div class="sr-only">
+                    &nbsp;
+                </div>
+                <br>
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="btn-group btn-group-justified">
+                        <a href="<%= request.getContextPath() %>/inicio" class="btn btn-info">Regresar al inicio</a>
+                        <a href="<%= request.getContextPath() %>/loginsesion" class="btn btn-warning">Iniciar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

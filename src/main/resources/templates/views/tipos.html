@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table>
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Descripcion</th>
+		</tr>
+	</thead>
+	<tbody th:each="item : ${lista}">
+		<tr>
+			<td th:text="${item.idTipousuario}"></td>
+			<td th:text="${item.descripcion}"></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

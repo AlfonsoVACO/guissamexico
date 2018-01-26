@@ -1,10 +1,17 @@
 package com.guissa.guissa.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,22 +20,120 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.guissa.guissa.models.entidades.*;
 import com.guissa.guissa.models.resources.*;
+import com.guissa.guissa.services.BannerService;
+import com.guissa.guissa.services.TipoUsuarioService;
 
 @Controller
 //@RequestMapping("/inicio")
 public class InicioController {
 	
+	@Autowired
+	@Qualifier("servicioBanner")
+	private BannerService servicioBanner;
+	
 	private static final Log LOGGER = LogFactory.getLog(InicioController.class);
 
-	@GetMapping("/index")
+	@GetMapping("/")
+	public RedirectView redirect() {
+		return new RedirectView("/inicio");
+	}
+
+	@GetMapping("/inicio")
 	public String index(Model model) {
-		model.addAttribute("listado", listabanner());
-		model.addAttribute("nombre", "Al");
+		model.addAttribute("listado", servicioBanner.listAllBanner());
 		return LstViews.INDEX_VIEW.getString();
 	}
+	
+	@RequestMapping(value = "/image/{image_id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getImage(@PathVariable("image_id") Integer imageId) throws IOException {
+    	
+    	Banner banner = servicioBanner.getBannerById(imageId).get();
+    	System.out.println(banner.toString());
+        byte[] imageContent = banner.getImagen();//get image from DAO based on id
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+    }
+	
+	@GetMapping("/menuss")
+	public String menuss(Model model) {
+		return LstViews.MENUSS_VIEWS.getString();
+	}
+	
+	@GetMapping("/categorias/{id}")
+	public ModelAndView categorias(@PathVariable(name = "id") String nombre) {
+		ModelAndView mav = new ModelAndView(LstViews.CATEGORIAS_VIEW.getString());
+		mav.addObject("nombre", nombre);
+		return mav;
+	}
+	
+	@GetMapping("/ubicacion")
+	public String ubicacion(Model model) {
+		model.addAttribute("listado", listabanner());
+		model.addAttribute("nombre", "Al");
+		return LstViews.UBICACION_VIEW.getString();
+	}
+	
+	@GetMapping("/negocios/{id}")
+	public ModelAndView negocios(@PathVariable(name = "id") String nombre) {
+		ModelAndView mav = new ModelAndView(LstViews.NEGOCIOS_VIEW.getString());
+		mav.addObject("nombre", nombre);
+		return mav;
+	}
+	
+	@GetMapping("/productos/{id}")
+	public ModelAndView productos(@PathVariable(name = "id") String nombre) {
+		ModelAndView mav = new ModelAndView(LstViews.NOTICIAS_VIEW.getString());
+		mav.addObject("nombre", nombre);
+		return mav;
+	}
+	
+	@GetMapping("/eventos/{id}")
+	public ModelAndView eventos(@PathVariable(name = "id") String nombre) {
+		ModelAndView mav = new ModelAndView(LstViews.EVENTOS_VIEW.getString());
+		mav.addObject("nombre", nombre);
+		return mav;
+	}
+
+	@GetMapping("/precios")
+	public String precios(Model model) {
+		model.addAttribute("listado", listabanner());
+		model.addAttribute("nombre", "Al");
+		return LstViews.PRECIOS_VIEW.getString();
+	}
+	
+	@GetMapping("/contacto")
+	public String contacto(Model model) {
+		model.addAttribute("listado", listabanner());
+		model.addAttribute("nombre", "Al");
+		return LstViews.CONTACTO_VIEW.getString();
+	}
+
+	@GetMapping("/registro")
+	public String registro(Model model) {
+		model.addAttribute("listado", listabanner());
+		model.addAttribute("nombre", "Al");
+		return LstViews.REGISTRO_VIEW.getString();
+	}
+
+	@GetMapping("/historias")
+	public String historias(Model model) {
+		model.addAttribute("listado", listabanner());
+		model.addAttribute("nombre", "Al");
+		return LstViews.HISTORIAS_VIEW.getString();
+	}
+
+	@GetMapping("/solicitud/{id}")
+	public ModelAndView solicitud(@PathVariable(name = "id") String nombre) {
+		ModelAndView mav = new ModelAndView(LstViews.SOLICITUD_VIEW.getString());
+		mav.addObject("nombre", nombre);
+		return mav;
+	}
+
 
 	@GetMapping("/indexmodel")
 	public ModelAndView indexmodel() {
@@ -75,7 +180,7 @@ public class InicioController {
 	}
 	
 	
-	@GetMapping("/addContact")
+	@GetMapping("/addContacto")
 	public ModelAndView addForm(@ModelAttribute("banner") Banner banner) {
 		ModelAndView mav = new ModelAndView(LstViews.INDEX_VIEW.getString());
 		mav.addObject("nombre", banner);

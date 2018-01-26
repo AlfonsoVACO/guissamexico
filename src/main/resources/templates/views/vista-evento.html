@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+	<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+	<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+	<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+	<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>Guissa | <%= evento.getNombre() %></title>
+		<meta name="description" content="Gastronomía Mexicana Recetas Restaurantes Ubicación Eventos">	
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	    <link rel="shortcut icon" href="<%= request.getContextPath() %>/images/favicon.ico" />
+	  	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/zerogrid.css">
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/slide.css">
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
+
+	    <link href="<%= request.getContextPath() %>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<!--[if lt IE 8]>
+	       <div style=' clear: both; text-align:center; position: relative;'>
+	         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+	           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+	        </a>
+	      </div>
+	    <![endif]-->
+	    <!--[if lt IE 9]>
+			<script src="<%= request.getContextPath() %>/js/html5.js"></script>
+			<script src="<%= request.getContextPath() %>/js/css3-mediaqueries.js"></script>
+		<![endif]-->
+		<script src="<%= request.getContextPath() %>/js/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="<%= request.getContextPath() %>/js/vistajs/vista-evento.js"></script>
+
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/alertifyjs/css/alertify.min.css" />         
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/alertifyjs/css/themes/default.min.css" />         
+        <script src="<%= request.getContextPath() %>/alertifyjs/alertify.min.js"></script>
+	    
+	</head>
+	<body>
+		<div class="wrap-body">
+			
+			<div class="top">
+				<div class="zerogrid">
+					<ul class="number f-left">
+						<li class="mail"><p><a href="<%= request.getContextPath() %>/loginsesion">iniciar sesión</a></p></li>
+					</ul>
+					<ul class="top-social f-right">
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<header>
+				<div class="zerogrid">
+					<center><div class="logo"><img src="<%= request.getContextPath() %>/images/guissa_17_2.png"></div></center>
+				</div>
+			</header>
+			
+		    <a href="#" class="nav-toggle">Toggle Navigation</a>
+		    <nav class="cmn-tile-nav">
+				<ul class="clearfix">
+                    <%@include file="/web/recursos/menu.jsp"  %>
+				</ul>
+		    </nav>
+
+			<section id="container" class="sub-page">
+				<div class="wrap-container zerogrid">
+					<div class="crumbs">
+						<ul>
+							<li><a href="<%= request.getContextPath() %>/inicio">Home</a></li>
+							<li><a href="<%= request.getContextPath() %>/eventos">Eventos</a></li>
+							<li><a href="#"><%= evento.getNombre() %></a></li>
+						</ul>
+					</div>
+					<div id="main-content" class="col-2-3">
+						<div class="wrap-content">
+                                                    <article>
+                                                        <div class="art-header">
+                                                                <div class="entry-title"> 
+                                                                        <h2><%= evento.getNombre() +" en "+ evento.getIdMunicipio().getNombreMun() %>, <%= evento.getIdEstado().getNombre() %></h2>
+                                                                </div>
+                                                                <div class="info">Por <a href="#"><%= evento.getIdUser().getNic() %></a> del <%= evento.getFechaI() %> al <%= evento.getFechaF() %></div>
+                                                                <%
+                                                                    byte[] photo = evento.getIdImagen().getImagen();
+                                                                    String bphoto = Base64.getEncoder().encodeToString(photo);
+                                                                %>
+                                                                <img style="max-width: 100%;" src="data:image/png;base64,<%= bphoto %>" alt="">
+                                                        </div>
+                                                        <div class="art-content">
+                                                                <p><%= evento.getDescripcion() %></p>
+                                                        </div>
+                                                    </article>
+
+							<div id="comments">
+	                            <ol class="comments-list">
+                                        <h2 class='comments-title'>(<%= evento.getComentarioseList().size() %>) Comentarios</h2>
+	                                <% for (int i = 0; i < evento.getComentarioseList().size(); i++){ %>
+                                        <li>
+						<div class="comment-box clearfix">
+							<div class="avatar"><img alt="" src="<%= request.getContextPath() %>/images/user-2.png"></div>
+							<div class="comment-content">
+								<div class="comment-meta">
+                                                                    <span class="comment-by"><%= evento.getComentarioseList().get(i).getNombre() %></span>
+								</div>
+								<span class="comment-date"><%= evento.getComentarioseList().get(i).getFecha() %></span>
+								<p><%= evento.getComentarioseList().get(i).getComentario() %></p>
+							</div>
+							<a id="lateralmyHeader<%= i %>" class="sendButton" href="javascript:lateralshowonlyone('lateralnewboxes<%= i %>');" >Responder</a>
+							<div class="lateralnewboxes" id="lateralnewboxes<%= i %>" style="display: none;">
+								<input type="text" class="form-control" placeholder="Nombre" id="nombre<%= i %>">
+								<div class="capaerrores" id="errnom<%= i %>">Olvidaste agregar tu nombre</div>
+                                <textarea class="form-control" name="strRespuesta" id="strRespuesta<%= i %>" placeholder="Escribe tu replica a este comentario"></textarea>
+                                <input type="hidden" name="idCom" id="idCom<%= i %>" value="<%= evento.getComentarioseList().get(i).getIdComentario() %>">
+                                <div class="capaerrores" id="err<%= i %>">Olvidaste agregar la replica</div>
+                                <div class="capaerrores" id="noe<%= i %>">No se pudo enviar</div>
+                                <div class="capaexito" id="exx<%= i %>">Tu comentario se agregó correctamente</div>
+                                    	
+                                <a class="sendButton" href="javascript:replica('errnom<%= i %>','err<%= i %>','exx<%= i %>','noe<%= i %>','nombre<%= i %>','strRespuesta<%= i %>','<%= evento.getComentarioseList().get(i).getIdComentario() %>')">Contestar</a>
+                            </div>
+						</div>
+						<ul>
+                                                    <% for (int j = 0; j < evento.getComentarioseList().get(i).getReplicaeList().size(); j++){ %>
+                                                    <li>
+                                                        <div class="comment-box clearfix">
+							<div class="avatar"><img alt="" src="<%= request.getContextPath() %>/images/user-2.png"></div>
+							<div class="comment-content">
+								<div class="comment-meta">
+                                                                    <span class="comment-by"><%= evento.getComentarioseList().get(i).getReplicaeList().get(j).getNombre() %></span>
+								</div>
+								<span class="comment-date"><%= evento.getComentarioseList().get(i).getReplicaeList().get(j).getFecha() %></span>
+								<p><%= evento.getComentarioseList().get(i).getReplicaeList().get(j).getReplica() %></p>
+							</div>
+                                                        </div>
+                                                    </li>
+                                                    <% } %>
+						</ul>
+					</li>
+                                        <% } %>
+	                            </ol>
+	                            <div id="respond">
+	                                <h2 class="respond-title">Deja tu comentario</h2>
+	                                <span class="form-caution">No necesitas tener una cuenta para poder comentar, de ser un comentario ofensivo, será borrado del registro</span>
+	                                <form action="" class="formas" name="formcomentp" id="formcomentp">
+	                                    <div class="row">
+	                                        <div class="col-md-4">
+	                                            <label for="author">Nombre<span class="required">*</span></label>
+	                                            <input id="strNombre" class="form-control" name="strNombre" type="text" size="30" aria-required="true">
+	                                            <div class="capaerrores" id="avisono">Olvidaste agregar el comentario.</div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="row">
+	                                        <div class="col-md-12">
+	                                            <label for="comment">Agrega tu comentario</label>
+	                                            <textarea id="strComentp" class="form-control" name="strComentp" cols="45" rows="8" aria-required="true"></textarea>
+	                                            <div class="capaerrores" id="avisocp">Olvidaste agregar el comentario.</div>
+	                                            <input name="comentp" class="sendButton" type="button" id="comentp" value="Comentar">
+	                                            <div class="capaexito" id="comentP">Mensaje enviado corectamente</div>     
+	                                            <input type="hidden" id="idprcoment" value="<%= evento.getIdEvento() %>"></input>
+	                                        </div>
+	                                    </div>
+	                                </form>
+	                            </div>
+	                        </div>
+
+							<div class="widget wid-related">
+								<div class="wrap-col">
+									<div class="wid-header">
+										<h5>Eventos relacionados</h5>
+									</div>
+									<div class="wid-content">
+										<div class="row">
+                                                                                    <% 
+                                                                                        for (int i = 0; i < eventosrel.size(); i++){ 
+                                                                                            byte[] photorel = eventosrel.get(i).getIdImagen().getImagen();
+                                                                                            String bphotorel = Base64.getEncoder().encodeToString(photorel);
+                                                                                    %>
+                                                                                    <div class="col-1-3">
+                                                                                        <div class="wrap-col">
+                                                                                            <a href="<%= request.getContextPath() %>/eventos?accion=previa&id=<%= eventosrel.get(i).getIdEvento() %>"><img src="data:image/png;base64,<%= bphotorel %>"/></a>
+                                                                                            <h4><a href="<%= request.getContextPath() %>/eventos?accion=previa&id=<%= eventosrel.get(i).getIdEvento() %>">
+                                                                                                    <%
+                                                                                                        if(eventosrel.get(i).getDescripcion().length() > 39){
+                                                                                                            out.print(eventosrel.get(i).getDescripcion().substring(0, 39)+"...");
+                                                                                                        }else{
+                                                                                                            out.print(eventosrel.get(i).getDescripcion());
+                                                                                                        }
+                                                                                                    %>
+                                                                                                </a></h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <% } %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="sidebar" class="col-1-3">
+						<div class="wrap-sidebar">
+
+							<div class="widget wid-post">
+								<div class="wid-header">
+									<h5>Eventos actuales</h5>
+								</div>
+								<div class="wid-content">
+                                                                    <% 
+                                                                        for(int i = 0 ; i < listaevento.size(); i++ ){ 
+                                                                            byte[] photore = listaevento.get(i).getIdImagen().getImagen();
+                                                                            String bphotore = Base64.getEncoder().encodeToString(photore);
+                                                                    %>
+                                                                    <div class="post">
+                                                                        <a href="<%= request.getContextPath() %>/eventos?accion=previa&id=<%= listaevento.get(i).getIdEvento() %>"><img src="data:image/png;base64,<%= bphotore %>"/></a>
+                                                                            <div class="wrapper">
+                                                                                    <h5><a href="<%= request.getContextPath() %>/eventos?accion=previa&id=<%= listaevento.get(i).getIdEvento() %>"><%= listaevento.get(i).getNombre() %></a></h5>
+                                                                            </div>
+                                                                    </div>
+                                                                    <% } %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</section>
+
+			<footer class="zerogrid">
+				<div class="copyright">
+					<div class="wrapper">
+						Copyright 2015 - <a href="http://www.zerotheme.com" target="_blank" rel="nofollow">Free Html5 Templates</a> Designed by Zerotheme.com
+						<ul class="quick-link f-right">
+							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="#">Terms of Use</a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+			<script src="<%= request.getContextPath() %>/js/classie.js"></script>
+			<script src="<%= request.getContextPath() %>/js/demo.js"></script>
+			<script src="<%= request.getContextPath() %>/js/vistajs/previa-replicasev.js" type="text/javascript"></script>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+        (function () {
+            var map = null;
+            var x = document.getElementById("localizacion");
+            var fin = document.getElementById("end").innerHTML;
+            var rendererOptions = {
+                draggable: true
+            };
+            var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+            var directionsService = new google.maps.DirectionsService();
+
+            function geolocalizar() {
+                navigator.geolocation.getCurrentPosition(mostrarLoc,mostrarError);   
+            }
+                                 
+            function mostrarError(error){ 
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        x.innerHTML = "No tienes permiso de geolocalización";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        x.innerHTML = "La información de la localización es irreconocible.";
+                        break;
+                    case error.TIMEOUT:
+                        x.innerHTML = "El tiempo de respuesta terminó.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        x.innerHTML = "Error desconocido.";
+                        break;
+                }
+            }
+                                 
+            function mostrarLoc(geo){ 
+                var cadena="";
+                var pos = {
+                    lat: geo.coords.latitude,
+                    lng: geo.coords.longitude
+                };
+                cadena = pos.lat +","+ pos.lng;
+                latitud = geo.coords.latitude;
+                longitud = geo.coords.longitude;
+                var inicio = cadena;
+                var mapOptions = {
+                    zoom: 7,
+                    center: inicio
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                directionsDisplay.setMap(map);
+                directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+
+                google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+                    computeTotalDistance(directionsDisplay.getDirections());
+                });
+                //x.innerHTML="Latitid: "+latitud+" Longitud: "+longitud;
+                var request = {
+                    origin: inicio,
+                    destination: fin,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+                directionsService.route(request, function(response, status) {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                    }
+                });
+            }
+
+            function computeTotalDistance(result) {
+                var total = 0;
+                var myroute = result.routes[0];
+                for (var i = 0; i < myroute.legs.length; i++) {
+                    total += myroute.legs[i].distance.value;
+                }
+                total = total / 1000.0;
+                document.getElementById('total').innerHTML = total + ' km';
+            }
+            geolocalizar();
+        })();
+        function lateralshowonlyone(thechosenone) {
+            $('.lateralnewboxes').each(function(index) {
+                if ($(this).attr("id") == thechosenone) {
+                    $(this).show(200);
+                }
+                else {
+                    $(this).hide(600);
+                }
+            });
+        }
+    </script> 
+</html>

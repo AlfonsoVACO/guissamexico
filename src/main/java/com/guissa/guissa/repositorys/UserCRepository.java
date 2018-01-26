@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.guissa.guissa.models.entidades.Userc;
 
-@Repository
+@Repository("usercRepository")
 public interface UserCRepository extends JpaRepository<Userc, Serializable>{
 
 }

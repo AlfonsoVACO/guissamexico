@@ -10,7 +10,7 @@ import com.guissa.guissa.models.entidades.Banner;
 import com.guissa.guissa.repositorys.BannerRepository;
 import com.guissa.guissa.services.BannerService;
 
-@Service
+@Service("servicioBanner")
 public class BannerServiceImp implements BannerService{
 	@Autowired
 	private BannerRepository bannerRepository;

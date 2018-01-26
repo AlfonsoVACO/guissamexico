@@ -4,6 +4,8 @@
     function classReg( className ) {
         return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
     }
+    
+    $("#menus_vista").load("/menuss"); 
 
     var hasClass, addClass, removeClass;
 

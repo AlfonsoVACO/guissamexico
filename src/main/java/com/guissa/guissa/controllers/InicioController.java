@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.guissa.guissa.models.entidades.*;
 import com.guissa.guissa.models.resources.*;
 import com.guissa.guissa.services.BannerService;
+import com.guissa.guissa.services.ContactoService;
 import com.guissa.guissa.services.TipoUsuarioService;
 
 @Controller
@@ -34,6 +36,10 @@ public class InicioController {
 	@Autowired
 	@Qualifier("servicioBanner")
 	private BannerService servicioBanner;
+	
+	@Autowired
+	@Qualifier("servicioContacto")
+	private ContactoService servicioContacto;
 	
 	private static final Log LOGGER = LogFactory.getLog(InicioController.class);
 
@@ -107,10 +113,11 @@ public class InicioController {
 	}
 	
 	@GetMapping("/contacto")
-	public String contacto(Model model) {
-		model.addAttribute("listado", listabanner());
-		model.addAttribute("nombre", "Al");
-		return LstViews.CONTACTO_VIEW.getString();
+	public ModelAndView contacto() {
+		ModelAndView mav = new ModelAndView(LstViews.CONTACTO_VIEW.getString());
+		mav.addObject("listado", listabanner());
+		mav.addObject("contacto", new Contacto());
+		return mav;
 	}
 
 	@GetMapping("/registro")
@@ -180,12 +187,10 @@ public class InicioController {
 	}
 	
 	
-	@GetMapping("/addContacto")
-	public ModelAndView addForm(@ModelAttribute("banner") Banner banner) {
-		ModelAndView mav = new ModelAndView(LstViews.INDEX_VIEW.getString());
-		mav.addObject("nombre", banner);
-		return mav;
-		
+	@PostMapping("/addcontacto")
+	public String addContact(@ModelAttribute("contacto") Contacto contacto) {
+		servicioContacto.saveContacto(contacto);
+		return "redirect: /contacto";		
 	}
 	//}
 

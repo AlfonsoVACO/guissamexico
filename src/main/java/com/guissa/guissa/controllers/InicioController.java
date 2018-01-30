@@ -1,3 +1,4 @@
+
 package com.guissa.guissa.controllers;
 
 import java.io.IOException;
@@ -189,6 +190,7 @@ public class InicioController {
 	
 	@PostMapping("/addcontacto")
 	public String addContact(@ModelAttribute("contacto") Contacto contacto) {
+		LOGGER.info("Guardando contacto");
 		servicioContacto.saveContacto(contacto);
 		return "redirect: /contacto";		
 	}

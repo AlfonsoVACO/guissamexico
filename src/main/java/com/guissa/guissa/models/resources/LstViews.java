@@ -22,7 +22,7 @@ public enum LstViews {
 	ERROR503_VIEW,
 	ERRORCONSTRUCT,
 	ERROR_DES_VIEW,
-	MENUSS_VIEWS;
+	MENUSS_VIEWS,LOGIN_VIEW;
 	
 	public String getString() {
 		switch(this) {
@@ -43,6 +43,8 @@ public enum LstViews {
 			case HISTORIAS_VIEW: return "views/historias";
 			case SOLICITUD_VIEW: return "views/solcitud";
 			
+			case LOGIN_VIEW: return "views/logina";
+			
 			case MENUSS_VIEWS: return "views/header";
 			case ERROR403_VIEW: return "errores/403";
 			case ERROR404_VIEW: return "errores/404";
@@ -51,6 +53,8 @@ public enum LstViews {
 			case ERROR503_VIEW: return "errores/503";
 			case ERRORCONSTRUCT: return "errores/under-construction";
 			case ERROR_DES_VIEW: return "errores/desco";
+			
+			
 		}
 		return "No found";
 	}

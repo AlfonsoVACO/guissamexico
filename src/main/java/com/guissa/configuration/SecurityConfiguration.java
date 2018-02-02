@@ -34,6 +34,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.usernameParameter("username").passwordParameter("password")
 		.defaultSuccessUrl("/login/sesion/loginsuccess").permitAll()
 		.and()
-		.logout().logoutUrl("/login/sesion/logout").logoutSuccessUrl("login?logout").permitAll();
+		.logout().logoutUrl("/login/sesion/logout").logoutSuccessUrl("/login?logout").permitAll();
 	}
 }

@@ -20,7 +20,7 @@ public class SesionController {
 	
 	private static final Log LOGGER = LogFactory.getLog(SesionController.class);
 	
-	@GetMapping("/")
+	@GetMapping("/login")
 	public String login(Model modelo,
 			@RequestParam(name = "error", required =false) String error,
 			@RequestParam(name = "logout", required =false) String logout) {

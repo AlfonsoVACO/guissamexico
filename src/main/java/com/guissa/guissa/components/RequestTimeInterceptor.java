@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.guissa.guissa.controllers.InicioController;
-import com.guissa.guissa.models.entidades.Auditoria;
+import com.guissa.guissa.models.entidades.Auditorias;
 import com.guissa.guissa.repositorys.AuditoriaRepository;
 
 @Component("requestTime")
@@ -44,7 +44,7 @@ public class RequestTimeInterceptor extends HandlerInterceptorAdapter {
 		if(auth != null && auth.isAuthenticated()) {
 			username = auth.getName();
 		}
-		Auditoria auditoria = new Auditoria(auth.getCredentials().toString(), new Date(), auth.getDetails().toString(), username);
+		Auditorias auditoria = new Auditorias(auth.getCredentials().toString(), new Date(), auth.getDetails().toString(), username);
 		auditoriaRepository.save(auditoria);
 		
 		LOGGER.info("Request: " + url +" time: '"+  startTime + "' ms");

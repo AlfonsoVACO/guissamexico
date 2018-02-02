@@ -9,5 +9,5 @@ import com.guissa.guissa.models.entidades.User;
 
 @Repository("sesionRepository")
 public interface SesionRepository  extends JpaRepository<User, Serializable>{
-	public abstract User findUserByName(String name);
+	public abstract User findUserByCorreo(String correo);
 }

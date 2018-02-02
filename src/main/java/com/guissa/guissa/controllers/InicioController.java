@@ -39,7 +39,7 @@ public class InicioController {
 	//@PreAuthorize("hasRole('ROLE_ADIM')")
 	//@PreAuthorize("permitAll()")
 	
-	private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	//private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	@Autowired
 	@Qualifier("servicioBanner")

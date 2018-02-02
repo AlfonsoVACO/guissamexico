@@ -26,8 +26,8 @@ public class SesionServiceImp implements UserDetailsService {
 	private SesionRepository sesionRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User usuario = sesionRepository.findUserByName(username);
+	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+		User usuario = sesionRepository.findUserByCorreo(correo);
 		List<GrantedAuthority> authorityes = buildAuthority(usuario.getIdTipousuario());
 		return (UserDetails) buildUser(usuario, authorityes);
 	}

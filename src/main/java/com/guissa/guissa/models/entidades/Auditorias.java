@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Auditorias.findByFecha", query = "SELECT a FROM Auditorias a WHERE a.fecha = :fecha")
     , @NamedQuery(name = "Auditorias.findByAccion", query = "SELECT a FROM Auditorias a WHERE a.accion = :accion")
     , @NamedQuery(name = "Auditorias.findBySesion", query = "SELECT a FROM Auditorias a WHERE a.sesion = :sesion")})
-public class Auditoria implements Serializable {
+public class Auditorias implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,14 +47,14 @@ public class Auditoria implements Serializable {
     @Column(name = "sesion")
     private String sesion;
 
-    public Auditoria() {
+    public Auditorias() {
     }
 
-    public Auditoria(Integer id) {
+    public Auditorias(Integer id) {
         this.id = id;
     }
 
-    public Auditoria(Integer id, String tabla, Date fecha, String accion, String sesion) {
+    public Auditorias(Integer id, String tabla, Date fecha, String accion, String sesion) {
         this.id = id;
         this.tabla = tabla;
         this.fecha = fecha;
@@ -62,7 +62,7 @@ public class Auditoria implements Serializable {
         this.sesion = sesion;
     }
 
-    public Auditoria(String tabla, Date fecha, String accion, String sesion) {
+    public Auditorias(String tabla, Date fecha, String accion, String sesion) {
 		super();
 		this.tabla = tabla;
 		this.fecha = fecha;
@@ -120,10 +120,10 @@ public class Auditoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Auditoria)) {
+        if (!(object instanceof Auditorias)) {
             return false;
         }
-        Auditoria other = (Auditoria) object;
+        Auditorias other = (Auditorias) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

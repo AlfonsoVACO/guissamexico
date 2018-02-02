@@ -13,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,11 @@ import com.guissa.guissa.services.TipoUsuarioService;
 @Controller
 //@RequestMapping("/inicio")
 public class InicioController {
+	
+	//@PreAuthorize("hasRole('ROLE_ADIM')")
+	//@PreAuthorize("permitAll()")
+	
+	private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	@Autowired
 	@Qualifier("servicioBanner")
@@ -116,7 +123,7 @@ public class InicioController {
 	@GetMapping("/contacto")
 	public ModelAndView contacto() {
 		ModelAndView mav = new ModelAndView(LstViews.CONTACTO_VIEW.getString());
-		mav.addObject("listado", listabanner());
+		//mav.addObject("listado", listabanner());
 		mav.addObject("contacto", new Contacto());
 		return mav;
 	}
@@ -195,5 +202,14 @@ public class InicioController {
 		return "redirect: /contacto";		
 	}
 	//}
+	
+	//Eliminar
+	@GetMapping("/deletecontacto")
+	public ModelAndView removecontacto(@RequestParam(name = "id", required=false) int id) {
+		servicioContacto.deleteContacto(id);
+		return contacto();
+	}
+	
+	//@{/deletecontacto?id=__${contact.id}__}
 
 }

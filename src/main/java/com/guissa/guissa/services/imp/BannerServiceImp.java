@@ -32,6 +32,9 @@ public class BannerServiceImp implements BannerService{
 
 	@Override
 	public void deleteBanner(Integer id) {
-		bannerRepository.deleteById(id);
+		Optional<Banner> optionalbanner = getBannerById(id);
+		Banner banner = optionalbanner.get();
+		if(banner != null)
+			bannerRepository.delete(banner);
 	}
 }

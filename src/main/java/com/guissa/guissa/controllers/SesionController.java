@@ -27,14 +27,29 @@ public class SesionController {
 		LOGGER.info("Metodo: login()");
 		modelo.addAttribute("error", error);
 		modelo.addAttribute("logout", logout);
-		modelo.addAttribute("user", new User());
+		//modelo.addAttribute("user", new User());
 		return LstViews.LOGIN_VIEW.getString();
 	}
 	
-	@PostMapping
+	/*@PostMapping
 	public String logincheck(@ModelAttribute(name = "user") User user) {
 		LOGGER.info("Metodo: logincheck()");
 		return LstAdminViews.ADMIN_INDEX_VIEW.getString();
+	}*/
+	
+	@GetMapping("/loginsuccess")
+	public String logincheck() {
+		return LstAdminViews.ADMIN_INDEX_VIEW.getString();
 	}
+	
+	//<input type='hidden' name='${_cfrf.paremeterName}' value='${_csrf.token}'></input>
+	// username
+	//password
+	
+	/*
+	 * <form th:action='${/logout}' method='POST'>
+	 * 
+	 * </form>
+	 * */
 
 }

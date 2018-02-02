@@ -40,7 +40,10 @@ public class ContactoServiceImp implements ContactoService {
 
 	@Override
 	public void deleteContacto(Integer id) {
-		contactoRepository.deleteById(id);
+		Optional<Contacto> optionalContacto  = getContactoById(id);
+		Contacto contacto = optionalContacto.get();
+		if(contacto != null)
+			contactoRepository.delete(contacto);
 		
 	}
 }

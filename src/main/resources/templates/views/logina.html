@@ -1,13 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Sesión</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link id="bootstrap-style" th:href="@{/administrador/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/administrador/css/bootstrap-responsive.min.css}" rel="stylesheet">
+	<link id="base-style" th:href="@{/administrador/css/style.css}" rel="stylesheet">
+	<link rel="shortcut icon" th:href="@{/principal/images/favicon.ico}" />
+	<link id="base-style-responsive" th:href="@{/administrador/css/style-responsive.css}" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+
+	<style type="text/css">
+		body {
+			background: url(/administrador/img/bg-login.jpg) !important;
+		}
+	</style>
 </head>
+
 <body>
-<form >
-<input type="text"></input>
-<input type="text"></input>
-</form>
-</body>
+	<div class="container-fluid-full">
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<div class="login-box">
+					<div class="icons">
+						<a href="index.php"><i class="halflings-icon home"></i></a>
+					</div>
+					<h2>Inicia sesión con tu cuenta</h2>
+					<form class="form-horizontal" name="user" action="session_init.php"
+						method="post">
+						<fieldset>
+
+							<div class="input-prepend" title="Username">
+								<span class="add-on"><i class="halflings-icon user"></i></span>
+								<input type="text" name="usern" class="input-large span10"
+									id="usern" placeholder="Correo electrónico" />
+							</div>
+							<div class="clearfix"></div>
+
+							<div class="input-prepend" title="Password">
+								<span class="add-on"><i class="halflings-icon lock"></i></span>
+								<input class="input-large span10" type="password" name="passwd"
+									placeholder="Contraseña" id="passwd" />
+							</div>
+							<div class="input-prepend" title="Contra">
+								<span class="add-on"><i class="halflings-icon ok"></i></span> <label>Ver
+									contraseña<input type="checkbox" id="Visual">
+								</label>
+							</div>
+							<div class="clearfix"></div>
+							<div class="button-login">
+								<input type="submit" class="btn btn-primary" name="enter"
+									id="enter" value="Entrar" />
+							</div>
+							<div class="clearfix"></div>
+					</form>
+					<hr>
+				</div>
+			</div>
+			<script th:src="@{/administrador/js/jquery-1.9.1.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery-migrate-1.0.0.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery-ui-1.10.0.custom.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.ui.touch-punch.js}"></script>
+			<script th:src="@{/administrador/js/modernizr.js}"></script>
+			<script th:src="@{/administrador/js/bootstrap.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.cookie.js}"></script>
+			<script th:src='@{/administrador/js/fullcalendar.min.js}'></script>
+			<script th:src='@{/administrador/js/jquery.dataTables.min.js}'></script>
+			<script th:src="@{/administrador/js/excanvas.js}"></script>
+			<script th:src="@{/administrador/js/jquery.flot.js}"></script>
+			<script th:src="@{/administrador/js/jquery.flot.pie.js}"></script>
+			<script th:src="@{/administrador/js/jquery.flot.stack.js}"></script>
+			<script th:src="@{/administrador/js/jquery.flot.resize.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.chosen.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.uniform.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.cleditor.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.noty.js}"></script>
+			<script th:src="@{/administrador/js/jquery.elfinder.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.raty.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.iphone.toggle.js}"></script>
+			<script th:src="@{/administrador/js/jquery.uploadify-3.1.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.gritter.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.imagesloaded.js}"></script>
+			<script th:src="@{/administrador/js/jquery.masonry.min.js}"></script>
+			<script th:src="@{/administrador/js/jquery.knob.modified.js}"></script>
+			<script th:src="@{/administrador/js/jquery.sparkline.min.js}"></script>
+			<script th:src="@{/administrador/js/counter.js}"></script>
+			<script th:src="@{/administrador/js/retina.js}"></script>
+			<script th:src="@{/administrador/js/custom.js}"></script>
+	</body>
+	<script type="text/javascript">
+        $("#Visual").change(function(){
+            if(document.getElementById('Visual').checked){
+                document.getElementById('passwd').type='text';
+            }else{
+                document.getElementById('passwd').type='password';
+            }
+        });
+    </script>
 </html>

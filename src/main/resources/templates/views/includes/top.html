@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<div id="menus_vista" th:fragment="top">
+		<div class="top">
+		    <div class="zerogrid">
+		        <ul class="number f-left">
+		            <li class="glyphicon"><p><a style="color:#fff;" href="/login">iniciar sesi&oacute;n</a></p></li>
+		        </ul>
+		        <ul class="top-social f-right">
+		            <li><a href="#" onclick="ventanaSecundaria('https://twitter.com/?status=Me gusta esta página http://www.guissamexico.com/"><i class="fa fa-twitter"></i></a></li>
+		            <li><a href="#" onclick="ventanaSecundaria('https://www.facebook.com/sharer/sharer.php?u=http://www.guissamexico.com/')"><i class="fa fa-facebook"></i></a></li>
+		            <li><a href="#" onclick="ventanaSecundaria('https://plus.google.com/share?url=http://www.guissamexico.com/')"><i class="fa fa-google-plus"></i></a></li>
+		            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+		        </ul>
+		    </div>
+		</div>
+		<header>
+			<div class="zerogrid" style="text-align: center;">
+				<div class="logo">
+					<img th:src="@{/principal/images/guissa_17_2.png}">
+				</div>
+			</div>
+		</header>
+		<a href="#" class="nav-toggle">Men&uacute;</a>
+		<nav class="cmn-tile-nav">
+			<ul class="clearfix" id="menus_vista">
+				<li class="colour-1"><a href="/inicio">Home</a></li>
+				<li class="colour-2"><a href="/categorias">Categor&iacute;as</a></li>
+				<li class="colour-3"><a href="/ubicacion">Ubicaci&oacute;n</a></li>
+				<li class="colour-4"><a href="/negocios">Negocios</a></li>
+				<li class="colour-5"><a href="/noticias">Productos</a></li>
+				<li class="colour-6"><a href="/eventos">Eventos</a></li>
+				<li class="colour-7"><a href="/precios">Precios</a></li>
+				<li class="colour-8"><a href="/contacto">Contacto</a></li>
+			</ul>
+		</nav>
+	</div>
+</html>

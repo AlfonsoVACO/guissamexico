@@ -1,38 +1,45 @@
 package com.guissa.configuration;
 
-import java.io.IOException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import com.guissa.guissa.components.RequestTimeInterceptor;
 
 @SuppressWarnings("deprecation")
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 	
-	@Autowired
-	@Qualifier("requestTime")
-	private RequestTimeInterceptor interceptor;
-	
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(interceptor);
-	}
-	
-	/*@Bean
-    public MultipartResolver multipartResolver() throws IOException {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize((1024 * 1024) * 10);
-        return multipartResolver;
-    }*/
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/login").setViewName("login");
+    }
+    
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+         registry.addResourceHandler("/static/**").addResourceLocations("file:///webapp");
+    }
+    
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
+    
+    private final long MAX_AGE_SECS = 3600;
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+                .maxAge(MAX_AGE_SECS);
+    }
 	
 	@Bean
     public SimpleMailMessage templateSimpleMessage() {

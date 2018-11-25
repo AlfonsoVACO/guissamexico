@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<aside th:fragment="menu">
+		<div id="sidebar"  class="nav-collapse ">
+			<ul class="sidebar-menu" id="nav-accordion">
+				<li class="mt">
+					<a class="active" href="/admins/">
+						<i class="fa fa-home"></i>
+						<span>Inicio</span>
+					</a>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" >
+						<i class="fa fa-empire"></i>
+						<span>Productos</span>
+					</a>
+					<ul class="sub">
+						<li><a  href="javascript: getItem('productos');"><i class="fa fa-file-text-o"></i> Productos</a></li>
+						<li><a  href="javascript: getItem('historias');"><i class="fa fa-history"></i> Historias</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" >
+						<i class="fa fa-laptop"></i>
+						<span>Negocios</span>
+					</a>
+					<ul class="sub">
+						<li><a  href="javascript: getItem('negocios');"><i class="fa fa-folder-open"></i> Negocios</a></li>
+						<li><a  href="javascript: getItem('caducados');"><i class="fa fa-lock"></i> Caducados</a></li>
+						<li><a  href="javascript: getItem('pedidos');"><i class="fa fa-file-archive-o"></i> Pedidos</a></li>
+						<li><a  href="javascript: getItem('contacto_neg');"><i class="fa fa-question"></i> Preguntas</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" >
+						<i class="fa fa-archive"></i>
+						<span>Eventos</span>
+					</a>
+					<ul class="sub">
+						<li><a  href="javascript: getItem('eventos');"><i class="fa fa-archive"></i> Eventos</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" >
+						<i class=" fa fa-comments"></i>
+						<span>Comentarios</span>
+					</a>
+					<ul class="sub">
+						<li><a  href="javascript: getItem('comentarios_ev');"><i class=" fa fa-comment"></i> Eventos</a></li>
+						<li><a  href="javascript: getItem('comentarios_pr');"><i class=" fa fa-comment"></i> Productos</a></li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" >
+						<i class="fa fa-cogs"></i>
+						<span>Otros</span>
+					</a>
+					<ul class="sub">
+						<li><a  href="javascript: getItem('notas');"><i class="fa fa-file-o"></i> Notas</a></li>
+						<li><a  href="javascript: getItem('patrocinadores');"><i class="fa fa-certificate"></i> Patrocinadores</a></li>
+						<li><a  href="javascript: getItem('perfil');"><i class="fa fa-user"></i> Perfil</a></li>
+						<li><a  href="javascript: getItem('precios');"><i class="fa fa-dollar"></i> Precios</a></li>
+						<li><a  href="javascript: getItem('recursos');"><i class="fa fa-try"></i> Recursos</a></li>
+						<li><a  href="javascript: getItem('slides');"><i class="fa fa-image"></i> Slides</a></li>
+						<li><a  href="<%= request.getContextPath() %>/admin-root"><i class="fa fa-terminal"></i> Terminal</a></li>
+						<% if(corr.equals("alvaco_1993@hotmail.com")){ %>
+						<li><a  href="javascript: getItem('usuarios');"><i class="fa fa-users"></i> Usuarios</a></li>
+						<% } %>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</aside>
+</html>

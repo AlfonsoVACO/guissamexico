@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.guissa.guissa.models.MBanner;
 import com.guissa.guissa.models.entidades.*;
@@ -34,13 +33,12 @@ import com.guissa.guissa.services.ContactoService;
 
 @Controller
 @PreAuthorize("permitAll()")
-//@RequestMapping("/inicio")
 public class InicioController {
 	
-	//@PreAuthorize("hasRole('ROLE_ADIM')")
-	//@PreAuthorize("permitAll()")
-	
-	//private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	@GetMapping("/login")
+	public String getLogin(Model model) {
+		return "views/logina";
+	}
 	
 	@Autowired
 	@Qualifier("servicioBanner")
@@ -53,11 +51,6 @@ public class InicioController {
 	private static final Log LOGGER = LogFactory.getLog(InicioController.class);
 
 	@GetMapping("/")
-	public RedirectView redirect() {
-		return new RedirectView("/inicio");
-	}
-
-	@GetMapping("/inicio")
 	public String index(Model model) {
 		List<MBanner> lista_mbanner = new ArrayList<MBanner>();
 		List<Banner> lista_banner = servicioBanner.listAllBanner();
@@ -126,6 +119,11 @@ public class InicioController {
 		ModelAndView mav = new ModelAndView(LstViews.EVENTOS_VIEW.getString());
 		mav.addObject("nombre", nombre);
 		return mav;
+	}
+	
+	@GetMapping("/eventos")
+	public String eventosShowList() {
+		return LstViews.EVENTOS_VIEW.getString();
 	}
 
 	@GetMapping("/precios")

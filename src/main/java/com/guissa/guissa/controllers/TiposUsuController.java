@@ -3,7 +3,6 @@ package com.guissa.guissa.controllers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.guissa.guissa.models.entidades.TipoUsuario;
 import com.guissa.guissa.services.TipoUsuarioService;
-import com.guissa.guissa.components.*;
 
 @Controller
 @RequestMapping("/administrador/tiposdeusuario")
@@ -23,9 +21,9 @@ public class TiposUsuController {
 	
 	private static final Log LOGGER = LogFactory.getLog(InicioController.class);
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("exComonent")
-	private ExComonent excomponent;
+	private ExComonent excomponent;*/
 	
 	/*@GetMapping("/")
 	public String list() {

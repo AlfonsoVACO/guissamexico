@@ -3,9 +3,6 @@ package com.guissa.guissa.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import com.guissa.guissa.models.entidades.User;
 
 public interface UserService {

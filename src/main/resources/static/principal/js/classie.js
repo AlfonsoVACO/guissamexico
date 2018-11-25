@@ -5,7 +5,7 @@
         return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
     }
     
-    $("#menus_vista").load("/menuss"); 
+    //$("#menus_vista").load("/menuss"); 
 
     var hasClass, addClass, removeClass;
 

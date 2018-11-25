@@ -15,7 +15,7 @@ import com.guissa.guissa.services.NegocioEsService;
 import com.guissa.guissa.services.NotasService;
 
 @Controller
-@RequestMapping("/administracion/inicio")
+@RequestMapping("/admins")
 public class AdminInicioController {
 
 	@Autowired

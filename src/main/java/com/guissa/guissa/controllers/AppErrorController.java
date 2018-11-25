@@ -2,13 +2,9 @@ package com.guissa.guissa.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
-//import org.springframework.boot.autoconfigure.web.ErrorAttributes;
-//import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
@@ -19,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-import com.guissa.guissa.models.resources.LstViews;
-
 @Controller
 public class AppErrorController implements ErrorController{
 
@@ -28,11 +22,6 @@ public class AppErrorController implements ErrorController{
     private ErrorAttributes errorAttributes;
 
     private final static String ERROR_PATH = "error/500";
-    
-    /*@ExceptionHandler(Exception.class)
-    public String showInternalError() {
-    	return "error/500";
-    }*/
 
     public AppErrorController(ErrorAttributes errorAttributes) {
         this.errorAttributes = errorAttributes;
@@ -84,11 +73,4 @@ public class AppErrorController implements ErrorController{
         }
         return HttpStatus.INTERNAL_SERVER_ERROR;
     }
-
-	/*@GetMapping("/error")
-	public ModelAndView errores() {
-		ModelAndView mav = new ModelAndView(LstViews.ERROR500_VIEW.getString());
-		return mav;
-
-	}*/
 }

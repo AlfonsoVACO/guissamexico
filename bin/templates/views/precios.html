@@ -1,170 +1,64 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
-<!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<title>Guissa | Precios</title>
-<meta name="description"
-	content="Gastronomía Mexicana Recetas Restaurantes Ubicación precios recetas mexicanas">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="shortcut icon"
-	href="<%= request.getContextPath() %>/images/favicon.ico" />
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/css/zerogrid.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/css/style.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/css/slide.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/css/menu.css">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<meta charset="utf-8">
+	<title>Guissa | Precios</title>
+	<head th:replace="views/includes/head :: head"></head>
+	<head>
+		<script type="text/javascript" th:src="@{/principal/ckeditor_sta/ckeditor.js}"></script>
+	</head>
+	<body>
+		<div class="wrap-body">
+			<div th:replace="views/includes/top :: top"></div>
+			<section id="container" class="sub-page">
 
-<link
-	href="<%= request.getContextPath() %>/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<!--[if lt IE 8]>
-	       <div style=' clear: both; text-align:center; position: relative;'>
-	         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-	           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-	        </a>
-	      </div>
-	    <![endif]-->
-<!--[if lt IE 9]>
-			<script src="<%= request.getContextPath() %>/js/html5.js"></script>
-			<script src="<%= request.getContextPath() %>/js/css3-mediaqueries.js"></script>
-		<![endif]-->
-</head>
-<body>
-	<div class="wrap-body">
-
-		<div id="menus_vista"></div>
-
-		<section id="container" class="sub-page">
-
-			<div class="wrap-container zerogrid">
-				<div class="crumbs">
-					<ul>
-						<li><a href="/inicio">Home</a></li>
-						<li><a href="#">Precios</a></li>
-					</ul>
-				</div>
-				<div id="main-content">
-					<div class="wrap-content">
-						<div class="chef">
-							<h1>Importante!</h1>
-							<hr>
-							<div
-								style="background-color: #eee; border-color: green; border-radius: 5px; border-top: 10px;">
-								<h3>Los precios que a continuación se presentan, son para
-									brindar el servicio de búsqueda a traves de guissa.com, para
-									dar a conocer tu negocio a los visitantes/turistas de la web
-									que buscan lugares dónde se encuentren platillos de méxico.</h3>
-							</div>
-							<% double basicoa = 0; double basicom = 0; double premiuma = 0;
-							double premiumm = 0; for (int i = 0; i < precios.size(); i++ ){
-							switch(precios.get(i).getTipo()){ case 1: basicom =
-							precios.get(i).getPrecio(); break; case 2: premiumm =
-							precios.get(i).getPrecio(); break; case 3: basicoa =
-							precios.get(i).getPrecio(); break; case 4: premiuma =
-							precios.get(i).getPrecio(); break; } } %>
-							<div class="row">
-								<div class="pricing-wrapper">
-									<div class="pricing-plan">
-										<h2 class="pricing-plan-title">Básico/Mensual</h2>
-										<div class="pricing-plan-price">
-											<sup>$</sup><%= basicom %>
-										</div>
-										<ul class="pricing-plan-features">
-											<li><strong>1</strong> usuario</li>
-											<li><strong>Comentarios</strong> de usuarios</li>
-										</ul>
-										<a
-											href="<%= request.getContextPath() %>/solicitud?type=1&from=11&dataroaming=1"
-											class="btn btn-primary">¡Contrata ahora!</a>
-									</div>
-									<div class="pricing-plan">
-										<h2 class="pricing-plan-title">Básico/Anual</h2>
-										<div class="pricing-plan-price">
-											<sup>$</sup><%= basicoa %>
-										</div>
-										<ul class="pricing-plan-features">
-											<li><strong>1</strong> usuario</li>
-											<li><strong>Comentarios</strong> de usuarios</li>
-										</ul>
-										<a
-											href="<%= request.getContextPath() %>/solicitud?type=3&from=11&dataroaming=3"
-											class="btn btn-primary">¡Contrata ahora!</a>
-									</div>
-									<div class="pricing-plan">
-										<!-- pricing-plan-promote-->
-										<h2 class="pricing-plan-title">Premium/Mensual</h2>
-										<div class="pricing-plan-price">
-											<sup>$</sup><%= premiumm %>
-										</div>
-										<ul class="pricing-plan-features">
-											<li><strong>Comentarios</strong> de usuarios</li>
-											<li><strong>Generación</strong> Reportes</li>
-											<li><strong>Graficación</strong> Pedidos</li>
-											<li><strong>Galería</strong> máximo 10 fotos</li>
-										</ul>
-										<a
-											href="<%= request.getContextPath() %>/solicitud?type=2&from=12&dataroaming=2"
-											class="btn btn-primary">¡Contrata ahora!</a>
-									</div>
-									<div class="pricing-plan">
-										<h2 class="pricing-plan-title">Premium/Anual</h2>
-										<div class="pricing-plan-price">
-											<sup>$</sup><%= premiuma %>
-										</div>
-										<ul class="pricing-plan-features">
-											<li><strong>Comentarios</strong> de usuarios</li>
-											<li><strong>Generación</strong> Reportes</li>
-											<li><strong>Graficación</strong> Pedidos</li>
-											<li><strong>Galería</strong> máximo 10 fotos</li>
-										</ul>
-										<a
-											href="<%= request.getContextPath() %>/solicitud?type=4&from=12&dataroaming=4"
-											class="btn btn-primary">¡Contrata ahora!</a>
-									</div>
-								</div>
-								<hr>
-								<p>
-									<strong>Nota: SÓLO SE PUEDEN PUBLICAR NEGOCIOS QUE
-										ESTÉN RELCIONADOS CON LA GASTRONOMÍA MEXICANA, LOS NEGOCIOS
-										CON COMIDA EXTRANGERA, SERÁN DESCARTADOS.</strong>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<footer class="zerogrid">
-			<div class="copyright">
-				<div class="wrapper">
-					Copyright 2015 - <a href="http://www.zerotheme.com" target="_blank"
-						rel="nofollow">Free Html5 Templates</a> Designed by Zerotheme.com
-					<ul class="quick-link f-right">
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="#">Terms of Use</a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
-
-		<script th:src="@{/principal/js/classie.js}"></script>
-		<script th:src="@{/principal/js/demo.js}"></script>
-		<script language="javascript">
-			function ventanaSecundaria(URL) {
-				window.open(URL, "Compartir",
-						"width=620,height=400,scrollbars=NO")
-			}
-		</script>
-
-	</div>
-</body>
+                <div class="wrap-container zerogrid">
+                    <div class="crumbs">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#">Precios</a></li>
+                        </ul>
+                    </div>
+                    <div id="main-content">
+                        <div class="wrap-content">
+                            <div class="chef">
+                                <h1>Hola!</h1>
+                                <hr>
+                                
+                                <div class="row">
+                                    <div class="col-2-4">
+                                        <p class="text-justify">El servicio proporcionado se ah hecho 
+                                            libre por causa del abandono de la 
+                                            gastronomía de méxico, sin embargo, 
+                                            nuestra estancia en la red no es 
+                                            patrocinada por el momento y se 
+                                            mantiene de sus administradores, 
+                                            parte de ello se destina a seguir 
+                                            buscando aquellas recetas y negocios 
+                                            que fomenten la gastronomía. Nos ayudarías mucho con tu donación.</p>
+                                    </div>
+                                    <div class="col-2-4">
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                            <input type="hidden" name="cmd" value="_s-xclick">
+                                            <input type="hidden" name="hosted_button_id" value="GGRY7665DL9GJ">
+                                            <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+                                            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </section>
+			<footer th:replace="views/includes/footer :: footer"></footer>
+			<div th:replace="views/includes/script :: script"></div>
+			<script type="text/javascript" th:src="@{/principal/js/validacion.js}"></script>
+			<script type="text/javascript">
+				function ventanaSecundaria(URL) {
+					window.open(URL, "Compartir",
+							"width=620,height=400,scrollbars=NO")
+				}
+			</script>
+		</div>
+	</body>
 </html>

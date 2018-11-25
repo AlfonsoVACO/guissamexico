@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Sesión</title>
@@ -15,22 +15,19 @@
         <div class="login-page">
             <div class="container">
             	<!--<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">-->
-                <form class="form-login" method="post" th:object="${user}" action="#" th:action="@{busca}">
-                    <h2 class=""form-login-heading>Administrador</h2>
+                <form class="form-login" th:action="@{/inlogin}" method="post">
+                    <h2 class="form-login-heading">Administrador</h2>
                     <div class="login-wrap">
-                        <input type="text" name="usern" th:field="*{correo}" id="usern" class="form-control" placeholder="Correo / Usuario" autofocus/>
+                        <input type="text" name="usern" id="usern" class="form-control" placeholder="Correo / Usuario" autofocus/>
                         <br>
-                        <input type="password" name="passwd" th:field="*{pass}" id="passwd" class="form-control" placeholder="**********"/>
+                        <input type="password" name="passwd" id="passwd" class="form-control" placeholder="**********"/>
                         <label class="checkbox">
-                            <span class="pull-left">
-                                <a data-toggle="modal" href="@{/loginsesionc">Soy negocio</a>
-                            </span>
                             <span class="pull-right">
                                 <a data-toggle="modal" data-target='#forget' >Contraseña olvidada</a>
                             </span>
                         </label>
                         <input name="enter" id="enter" class="btn btn-theme btn-block" type="submit" value="Iniciar"/>
-                        <input id="inicioses" onclick="location.href='/guissa/inicio';" class="btn btn-theme btn-block" type="button" value="Volver"/>
+                        <input id="inicioses" onclick="location.href='/';" class="btn btn-theme btn-block" type="button" value="Volver"/>
                         <hr>
                     </div>
                 </form>
@@ -46,7 +43,7 @@
                         <h4 class="modal-title" >Contraseña olvidada</h4>
                     </div>
                     <div class="modal-body" role="main">
-                        <table align="center" class="table">
+                        <table class="table">
                             <tr valign="baseline">
                                 <td nowrap align="right"></td>
                                 <td>

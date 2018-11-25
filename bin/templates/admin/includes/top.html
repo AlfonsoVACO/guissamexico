@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<header class="header black-bg" th:fragment="top">
+		<div class="sidebar-toggle-box">
+			<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+		</div>
+		<a th:href="@{/administrador/inicio/}" class="logo"><b>Administrador</b></a>
+		<div class="nav notify-row" id="top_menu">
+			<ul class="nav top-menu">
+				<li id="header_inbox_bar" class="dropdown">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+						<i class="fa fa-envelope-o"></i>
+						<span class="badge bg-theme"></span>
+					</a>
+					<ul class="dropdown-menu extended inbox">
+						<div class="notify-arrow notify-arrow-green"></div>
+						<li><a href="javascript: getItem('contacto');">Ver todos los mensajes</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="top-menu">
+			<ul class="nav pull-right top-menu">
+				<li><a class="logout" href="@{/logout?cerrar=true}">Salir</a></li>
+			</ul>
+		</div>
+	</header>
+</html>

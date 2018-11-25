@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/administrador/patrocinadores")
+@RequestMapping("/administracion/patrocinadores")
 public class AdminPatrocinadoresController {
 
 }

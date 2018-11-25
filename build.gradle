@@ -53,7 +53,10 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile "com.mysema.querydsl:querydsl-jpa:3.7.4"
+	compile("com.mysema.querydsl:querydsl-apt:3.7.4") 
 	
+	compile('org.springframework.boot:spring-boot-starter-mail')
 	//compile 'org.springsource.loaded:spring-loaded:1.1.1-dev'
 	
 	runtime('mysql:mysql-connector-java')
@@ -63,6 +66,28 @@ dependencies {
 	testCompile 'javax.el:el-api:2.2.1-b04'
 	
 }
+/*compileJava {
+    options.compilerArgs << "-s"
+    options.compilerArgs << "$projectDir/generated/java"
+
+    doFirst {
+        // make sure that directory exists
+        file(new File(projectDir, "/generated/java")).mkdirs()
+    }
+}
+
+clean.doLast {
+    // clean-up directory when necessary
+    file(new File(projectDir, "/generated")).deleteDir()
+}
+
+sourceSets {
+    generated {
+        java {
+            srcDir "$projectDir/generated/java"
+        }
+    }
+}*/
 /*dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"

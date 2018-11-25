@@ -45,7 +45,7 @@ public class RequestTimeInterceptor extends HandlerInterceptorAdapter {
 			username = auth.getName();
 		}
 		Auditorias auditoria = new Auditorias(auth.getCredentials().toString(), new Date(), auth.getDetails().toString(), username);
-		auditoriaRepository.save(auditoria);
+		//auditoriaRepository.save(auditoria);
 		
 		LOGGER.info("Request: " + url +" time: '"+  startTime + "' ms");
 	}

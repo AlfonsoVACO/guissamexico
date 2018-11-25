@@ -6,13 +6,24 @@
 
 
 function getItem(item){
-    var tipomenu = "/guissa/administrador/vistas/"+item+"/index.jsp";
+	var app = angular.module('myApp', []);
+	//EL CONTROLADOR OBTIENE LOS DATOS DE UNA URL
+	app.controller('inicioControlador', function($scope, $http) {
+		$http.get("http://localhost:8080/administracion/"+item+"/").then(function(response) {
+			console.log(response);
+			$("#menuResult").fadeOut("fast", function() {
+				$(this).html(response.data).slideDown(10);
+			});
+		});
+	});
+	
+    /*var tipomenu = item;
     $.ajax({
         type: "post" ,
         url: tipomenu,
         cache:false,
         beforeSend:function(){
-            $("#menuResult").html("<img src='/guissa/administrador/img/lorde.gif'>");
+            $("#menuResult").html("<img src='/administrador/img/lorde.gif'>");
         },
         success: function(dato){
             $("#menuResult").fadeOut("fast",function(){
@@ -22,7 +33,7 @@ function getItem(item){
         error: function(XMLHttpRequest,textStatus,errorthrows){
             alert("Ocurrió un error: "+ errorthrows);
         }
-    });
+    });*/
 } 
 
 function crudHistorys(crud, id){

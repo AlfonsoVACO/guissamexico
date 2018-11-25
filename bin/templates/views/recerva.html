@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+    <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+    <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+    <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+	<title>Guissa | Reservación</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="<%= request.getContextPath() %>/images/favicon.ico" />
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/zerogrid.css">
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/slide.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!--[if lt IE 8]>
+	    <div style=' clear: both; text-align:center; position: relative;'>
+	        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+                    <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+	        </a>
+	    </div>
+	<![endif]-->
+	<!--[if lt IE 9]>
+            <script src="../js/html5.js"></script>
+            <script src="../js/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<script src="<%= request.getContextPath() %>/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="<%= request.getContextPath() %>/js/vistajs/vista-negocio.js"></script>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/alertifyjs/css/alertify.min.css" />         
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/alertifyjs/css/themes/default.min.css" />         
+        <script src="<%= request.getContextPath() %>/alertifyjs/alertify.min.js"></script>	    
+    </head>
+    <body>
+        <div class="wrap-body">
+            <section id="container" class="sub-page">
+		<div class="wrap-container zerogrid">
+                    <div id="main-content">
+			<div class="wrap-content">
+                            <div class="row">
+				<div class="col-1-3">
+                                    <div class="wrap-col">
+					<h3>Llena los datos con tu información</h3>
+                                        <p>Para poder hacer una recervación a cualquier negocio, es necesario que se tenga un registro por el propio, de lo contrario, las recervaciones deben hacer de llamada personal o telefonicamente.</p><br/>
+					<h3>Teléfonos de éste restaurante</h3>
+                                        <p><%= negocio.getTelefono() %><br><%= negocio.getTelefono2() %></p>
+                                        <p><%= negocio.getIdUser().getCorreo() %></p>
+					<h3>Otra opción</h3>
+					<select id="Reserva" style="display:block;width:100%;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;color:#000;	border:1px solid #654e2d;padding:13px;margin: 5px 0 25px 0;font-size: 16px;max-height: 45px;">
+                                            <option value="0">No tengo cuenta en este negocio</option>
+                                            <option value="1">Cuento con registro en éste negocio</option>
+			                </select>
+                                    </div>
+				</div>
+				<div class="col-2-3">
+                                    <div class="wrap-col">
+					<div class="contact">											
+			                    <div id="DatasetNR" style="border-radius: 10px; color: green;">
+				                Debes llamar al número del negocio para hacer tu recervación o pedido, de otra forma, contactate con el negocio para ser registrado en él.
+				            </div>
+				            <div id="DatasetPr" style="display: none;">
+                                                <form name="fromReserva" id="fromReserva">
+                                                    <div class="form-group">
+				                        <input type="text" class="form-control" name="txtCorreo" placeholder="Correo" />
+				                        <div class="capaerrores" name="errorNR">Olvidates agregar tu correo</div>
+				                    </div>
+				                    <div class="form-group">
+				                        <textarea name="txtPeidido" rows="6" placeholder="Pedido o justificación de reservación" class="form-control"></textarea>
+				                        <div class="capaerrores" name="errorPR">Olvidates agregar tu justificación</div>
+				                    </div>
+				                    <div class="form-group">
+				                        <input type="datetime-local" class="form-control" name="txtFecha"/>
+				                        <div class="capaerrores" name="errorFR">Asignar una fecha</div>
+				                        <div class="capaexito" name="exitoENN">Asignar una fecha</div>
+				                        <div class="capaerrores" name="errorNE">Asignar una fecha</div>
+				                        <input type='hidden' name='txtid_neg' value='<%= negocio.getIdNegocio() %>' />
+				                    </div>
+				                    <div class="modal-footer">
+				                        <input type="button" class="btn btn-success" id="AgregaPedido" value="Reservar">
+				                    </div>
+				                </form> 
+                                            </div>
+                                        </div>
+                                    </div>
+				</div>
+                            </div>
+			</div>
+                    </div> 
+		</div>
+            </section>
+            <footer class="zerogrid">
+                <div class="copyright">
+                    <div class="wrapper">
+                        Copyright 2015 - <a href="http://www.zerotheme.com" target="_blank" rel="nofollow">Free Html5 Templates</a> Designed by Zerotheme.com
+                        <ul class="quick-link f-right">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+            <script src="<%= request.getContextPath() %>/js/classie.js"></script>
+            <script src="<%= request.getContextPath() %>/js/demo.js"></script>
+        </div>
+    </body>
+    <script>
+        $("#Reserva").change(function () {
+            var cd = document.getElementById('Reserva').value;
+            if(cd==="1"){
+                $("#DatasetPr").show("slow");
+                $("#DatasetNR").hide("slow");
+            }else{
+                $("#DatasetPr").hide("slow");
+                $("#DatasetNR").show("slow");
+            }
+        });
+        function lateralshowonlyone(thechosenone) {
+             $('.lateralnewboxes').each(function(index) {
+                  if ($(this).attr("id") === thechosenone) {
+                       $(this).show(200);
+                  }
+                  else {
+                       $(this).hide(600);
+                  }
+             });
+        }
+    </script>
+</html>

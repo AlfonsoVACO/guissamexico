@@ -3,6 +3,7 @@ package com.guissa.guissa.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.guissa.guissa.models.MBanner;
 import com.guissa.guissa.models.entidades.*;
 import com.guissa.guissa.models.resources.*;
 import com.guissa.guissa.services.BannerService;
 import com.guissa.guissa.services.ContactoService;
-import com.guissa.guissa.services.TipoUsuarioService;
 
 @Controller
+@PreAuthorize("permitAll()")
 //@RequestMapping("/inicio")
 public class InicioController {
 	
@@ -58,7 +59,21 @@ public class InicioController {
 
 	@GetMapping("/inicio")
 	public String index(Model model) {
-		model.addAttribute("listado", servicioBanner.listAllBanner());
+		List<MBanner> lista_mbanner = new ArrayList<MBanner>();
+		List<Banner> lista_banner = servicioBanner.listAllBanner();
+		for(Banner item: lista_banner) {
+			MBanner modelo_banner = new MBanner();
+			modelo_banner.setIdBanner(item.getIdBanner());
+			modelo_banner.setNombre(item.getNombre());
+			modelo_banner.setSubTitle(item.getSubTitle());
+			
+			byte[] photo = item.getImagen();
+            String bphoto = Base64.getEncoder().encodeToString(photo);
+			modelo_banner.setImagen(bphoto);
+			
+			lista_mbanner.add(modelo_banner);
+		}
+		model.addAttribute("listado", lista_mbanner);
 		return LstViews.INDEX_VIEW.getString();
 	}
 	

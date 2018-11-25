@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author 4440s
  */
 @Entity
-@Table(name = "banner", catalog = "guissamexico", schema = "")
+@Table(name = "banner", catalog = "guissa", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Banner.findAll", query = "SELECT b FROM Banner b")
@@ -42,10 +42,10 @@ public class Banner implements Serializable {
     private Integer idBanner;
     @Basic(optional = false)
     @Column(name = "Nombre")
-    private String nombre;
+    public String nombre;
     @Basic(optional = false)
     @Column(name = "SubTitle")
-    private String subTitle;
+    public String subTitle;
     @Basic(optional = false)
     @Lob
     @Column(name = "Imagen")

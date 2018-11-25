@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+	<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+	<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<html lang="en">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>Guissa | Contacto</title>
+		<meta name="description" content="Gastronomía Mexicana Recetas Restaurantes Ubicación">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="shortcut icon" th:href="@{/principal/images/favicon.ico}">
+		<link rel="stylesheet" th:href="@{/principal/css/zerogrid.css}">
+		<link rel="stylesheet" th:href="@{/principal/css/style.css}">
+		<link rel="stylesheet" th:href="@{/principal/css/slide.css}">
+		<link rel="stylesheet" th:href="@{/principal/css/menu.css}">
+		
+		<link th:href="@{/principal/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+		<!--[if lt IE 8]>
+			<div style=' clear: both; text-align:center; position: relative;'>
+				<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+		                    UPS!
+				</a>
+			</div>
+		<![endif]-->
+		<!--[if lt IE 9]>
+			<script th:src="@{/principal/js/html5.js}"></script>
+			<script th:src="@{/principal/js/css3-mediaqueries.js}"></script>
+		<![endif]-->
+	
+		<link rel="stylesheet" th:href="@{/principal/alertifyjs/css/alertify.min.css}" />
+		<link rel="stylesheet" th:href="@{/principal/alertifyjs/css/themes/default.min.css}" />
+		<script th:src="@{/principal/alertifyjs/alertify.min.js}"></script>
+
+		<script type="text/javascript" th:src="@{/principal/ckeditor_sta/ckeditor.js}"></script>
+		<script th:src="@{/principal/js/jquery-2.1.3.min.js}"></script>
+		<script type="text/javascript" th:src="@{/principal/js/validacion.js}"></script>
+	</head>
+	<body>
+		<div class="wrap-body">
+			<div id="menus_vista"></div>
+			<section id="container" class="sub-page">
+				<div class="wrap-container zerogrid">
+					<div class="crumbs">
+						<ul>
+							<li><a href="/inicio">Home</a></li>
+							<li><a href="/contacto">Contacto</a></li>
+						</ul>
+					</div>
+					<div id="main-content">
+						<div class="wrap-content">
+							<div class="row">
+								<div class="col-1-3">
+									<div class="wrap-col">
+										<h1>¿Tienes un producto que necesita ser reconocido?</h1>
+										<p>Esta opción es para que tú, como visitante, agregues un
+											producto que necesite ser mencionado, contandonos la historía
+											de aquel producto, de esta manera darías a conocer platillos
+											no conocidos y evitar su extinción</p>
+										<br /> <a href="/historias">Click aqui para agregar tu historia</a>
+									</div>
+								</div>
+								<div class="col-2-3">
+									<div class="wrap-col">
+										<div class="contact">
+											<div id="contact_form">
+												<form name="formContact" th:action="@{/inicio/addContacto}"
+													th:object="${listado}" method="post">
+													<label class="row">
+														<div class="col-1-2">
+															<div class="wrap-col">
+																<input type="text" name="strNombCont" id="strNombCont"
+																	placeholder="Ingresa tu nombre" required="required" />
+																<div class="capaerrores" id="NombCont">Has olvidado
+																	el nombre</div>
+															</div>
+														</div>
+														<div class="col-1-2">
+															<div class="wrap-col">
+																<input type="email" name="strEmaiCont" id="strEmaiCont"
+																	placeholder="Ingresa tu correo" required="required" />
+																<div class="capaerrores" id="EmailCont">Has
+																	olvidado el E-mail</div>
+																<div class="capaerrores" id="EmailICont">Debes
+																	agregar un e-mail válido</div>
+															</div>
+														</div>
+													</label> <label class="row">
+														<div class="wrap-col">
+															<div class="wrap-col">
+																<input type="text" name="strMotiCont" id="strMotiCont"
+																	placeholder="Motivo" required="required" />
+																<div class="capaerrores" id="MotivCont">Has
+																	olvidado el Motivo</div>
+															</div>
+														</div>
+													</label> <label class="row">
+														<div class="wrap-col">
+															<textarea name="strMensCont" id="strMensCont"
+																class="form-control" rows="4" cols="25"
+																required="required" placeholder="Mensaje"></textarea>
+															<div class="capaerrores" id="MensCont">Has olvidado
+																el Mensaje</div>
+														</div>
+													</label>
+													<center>
+														<input type="button" name="accion" id="submitContac" class="sendButton" value="Enviar">
+														<div class="capaexito" id="ExiCont">Comentario exitoso</div>
+														<div class="capaerrores" id="ErrCont"></div>
+													</center>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer class="zerogrid">
+				<div class="copyright">
+					<div class="wrapper">
+						Copyright 2015 - <a href="http://www.zerotheme.com" target="_blank"
+							rel="nofollow">Free Html5 Templates</a> Designed by Zerotheme.com
+						<ul class="quick-link f-right">
+							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="#">Terms of Use</a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+	
+			<script th:src="@{/principal/js/classie.js}"></script>
+			<script th:src="@{/principal/js/demo.js}"></script>
+			<script language="javascript">
+				function ventanaSecundaria(URL) {
+					window.open(URL, "Compartir",
+							"width=620,height=400,scrollbars=NO")
+				}
+			</script>
+		</div>
+	</body>
+</html>

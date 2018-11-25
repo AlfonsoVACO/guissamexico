@@ -1,0 +1,75 @@
+<form method="post" id="formbannercrud" enctype="multipart/form-data">
+    <div class="modal-body">
+        <fieldset>
+            <div class="form-group">
+                <label class="control-label" for="fileInput">Título:</label>
+                <div class="controls">
+                    <input name="strNombreBIm" id="strNombreBIm" type="text" class="form-control" placeholder="Título" value="${ banner.nombre != null ? banner.nombre : ''}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="fileInput">Sub-Título:</label>
+                <div class="controls">
+                    <input name="strNombreBOther" id="strNombreBOther" type="text" class="form-control" placeholder="Sub-Titulo" value="${ banner.subTitle != null ? banner.subTitle : ''}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="fileInput">Imágen:</label>
+                <div class="controls">
+                    <input type="file" name="miArchivo" id="miArchivo" />
+                </div>
+            </div>
+            <input type="hidden" name="id_usr" id="id_pro" value="1" />
+            <input type="hidden" name="id_bann_editeli" id="id_pro_editeli" value="${ banner != null ? banner.idBanner : '' }" />
+            <input type="hidden" name="banneraccion" id="banneraccion" th:text="${estilo}"/>
+            <input type="submit" class="btn btn-default" th:text="${estilo}"/>
+        </fieldset>
+    </div>
+</form>
+<script>
+    (function(){
+        
+        $("#formbannercrud").on("submit", function(e){
+            e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("formbannercrud"));
+            formData.append("dato", "valor");
+            $.ajax({
+                url: "cnadminslides?accion=crudSlide",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(res){
+                if($.trim(res) === "1"){
+                    alertify.alert("Guissa","Operación realizada con éxito");
+                    recargaSlide();
+                }else if($.trim(res) === "0"){
+                    alertify.alert("Guissa","No se pudeo realizar la operación");
+                }else {
+                    alertify.alert("Guissa","Error desconocido o en el servidor");
+                }
+            });
+        });
+        function recargaSlide(){
+            $.ajax({
+                type: "post" ,
+                url: "cnadminslides?accion=getSlides",
+                cache:false,
+                beforeSend:function(){
+                    $("#lstMuestra").html("<img src='/guissa/administrador/img/lorde.gif'>");
+                },
+                success: function(dato){
+                    $("#lstMuestra").fadeOut("fast",function(){
+                        $(this).html(dato).slideDown(10);
+                    });
+                },
+                error: function(XMLHttpRequest,textStatus,errorthrows){
+                    alert("Ocurrió un error: "+ errorthrows);
+                }
+            });
+        }
+    })();
+</script>

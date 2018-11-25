@@ -10,8 +10,7 @@
 			<aside th:replace="admin/includes/menu :: menu"></aside>
 	
 			<section id="main-content">
-				<section class="wrapper" id="menuResult" ng-app="myApp"
-					ng-controller="inicioControlador">
+				<section class="wrapper" id="menuResult">
 					<div class="row">
 						<div class="col-lg-9 main-chart">
 							<div class="row mtbox">
@@ -154,10 +153,9 @@
 									<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
 								</div>
 								<div class="details">
-									<p>
+									
 										<muted th:text="${item_notas.fecha}"></muted>
-										<br /> <a href="#"
-											th:text="${item_notas.idUser.nombre + ' ' + item_notas.idUser.apellidos}"></a>
+										<br /> <a href="#" th:text="${item_notas.idUser.nombre + ' ' + item_notas.idUser.apellidos}"></a>
 									<div th:if="${item_notas.nota.length() > 50}">
 										<p>Esta nota tiene una cadena de texto muy larga, así que
 											es mejor ver el mensaje completo</p>
@@ -166,47 +164,45 @@
 										<p th:text="${item_notas.nota}"></p>
 									</div>
 									<br />
-									</p>
 								</div>
 							</div>
 							<h3>Administradores</h3>
-							<div id="adminlist"></div>
+							<div th:each="users,iterator : ${lstusers}">
+								<div class="desc">
+							        <div class="thumb">
+							            <img class="img-circle" th:src="@{data:image/jpeg;base64,__${users.avatar}__}" width="35px" height="35px" align="">
+							        </div>
+							        <div class="details">
+							            <p>
+							                <a href="#" data-toggle='modal' th:data-target="${'#idAdminS' + iterator.index}" th:text="${users.nombre + ' ' + users.apellidos}"></a><br/>
+							                <muted th:text="${users.nic}"></muted>
+							            </p>
+							        </div>
+							    </div>
+							    <div class="modal fade modal-danger" tH:id="${'idAdminS' + iterator.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							        <div class="modal-dialog" role="document">
+							            <div class="modal-content">
+							                <div class="modal-header">
+							                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							                        <span aria-hidden="true">&times;</span>
+							                    </button>
+							                    <h4 class="modal-title">Administrador</h4>
+							                </div>
+							                <div class="modal-body">
+							                    <strong>Nombre: </strong> <span th:text="${users.nombre}"></span><br />
+							                    <strong>Apellidos: </strong> <span th:text="${users.apellidos}"></span><br />
+							                    <strong>Correo: </strong> <span th:text="${users.correo}"></span><br />
+							                    <strong>Nick: </strong> <span th:text="${users.nic}"></span><br />
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							</div>
 						</div>
 					</div>
 				</section>
 			</section>
 		</section>
-		<div th:replace="views/includes/script :: script"></div>
-		<script type="text/javascript">
-            (function(){
-                $.ajax({
-                    type: "post" ,
-                    url: "cnadmininicio?enter=getAdmins",
-                    cache:false,
-                    success: function(dato){
-                        $("#adminlist").fadeOut("fast",function(){
-                            $(this).html(dato).slideDown(10);
-                        });
-                    },
-                    error: function(XMLHttpRequest,textStatus,errorthrows){
-                        alert("Ocurrió un error: "+ errorthrows);
-                    }
-                });
-                
-                $.ajax({
-                    type: "post" ,
-                    url: "cnadmininicio?enter=getReseto&iduser=<%= idUser %>",
-                    cache:false,
-                    success: function(dato){
-                        if($.trim(dato) !== ""){
-                            location.href=dato;
-                        }
-                    },
-                    error: function(XMLHttpRequest,textStatus,errorthrows){
-                        alert("Ocurrió un error: "+ errorthrows);
-                    }
-                });
-            })();
-        </script>
+		<div th:replace="admin/includes/script :: script"></div>
 	</body>
 </html>

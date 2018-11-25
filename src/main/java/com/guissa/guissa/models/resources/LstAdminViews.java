@@ -1,25 +1,13 @@
 package com.guissa.guissa.models.resources;
 
-public enum LstAdminViews {
-	ADMIN_INDEX_VIEW,
-	ADMIN_SLIDES_INDEX_VIEW,
-	ADMIN_SLIDES_CRUD_VIEW,
-	ADMIN_SLIDES_LISTA_VIEW,
-	ADMIN_PRODUCTOS_INDEX_VIEW,
-	ADMIN_PRODUCTOS_CRUD_VIEW,
-	ADMIN_PRODUCTOS_LISTA_VIEW;
+public class LstAdminViews {
+	public static String ADMIN_INDEX_VIEW = "admin/index";			
+	public static String ADMIN_SLIDES_INDEX_VIEW = "admin/vistas/slides/index";
+	public static String ADMIN_SLIDES_CRUD_VIEW = "admin/vistas/slides/crud";
+	public static String ADMIN_SLIDES_LISTA_VIEW = "admin/vistas/slides/lstVista";
 	
-	public String getString() {
-		switch(this) {
-			case ADMIN_INDEX_VIEW: return "admin/index";			
-			case ADMIN_SLIDES_INDEX_VIEW: return "admin/vistas/slides/index";
-			case ADMIN_SLIDES_CRUD_VIEW: return "admin/vistas/slides/crud";
-			case ADMIN_SLIDES_LISTA_VIEW: return "admin/vistas/slides/lstVista";
-			case ADMIN_PRODUCTOS_INDEX_VIEW: return "admin/vistas/productos/index";
-			case ADMIN_PRODUCTOS_CRUD_VIEW: return "admin/vistas/productos/crud";
-			case ADMIN_PRODUCTOS_LISTA_VIEW: return "admin/vistas/productos/lstVista";
-		}
-		return "No found";
-	}
+	public static String ADMIN_PRODUCTOS_INDEX_VIEW = "admin/vistas/productos/index";
+	public static String ADMIN_PRODUCTOS_CRUD_VIEW = "admin/vistas/productos/crud";
+	public static String ADMIN_PRODUCTOS_LISTA_VIEW = "admin/vistas/productos/lstVista";
 
 }

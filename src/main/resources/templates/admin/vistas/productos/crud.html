@@ -1,10 +1,269 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<form name="formproducto" id="formproducto">
+	    <div class="modal-body">
+	        <fieldset>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Nombre del producto:</label>
+	                <div class="controls">
+	                    <input name="strNombrePro" type="text" class="form-control" id="strNombrePro" placeholder="Nombre" th:value="${producto.nombre}">
+	                </div>
+	                <div class="capaerrores" id="aviso1">Olvidaste el nombre del producto.</div>
+	            </div>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Tipo de producto:</label>
+	                <div class="controls">
+	                    <select name="strTipoPro" class="form-control"  id="strTipoPro">
+	                    	<option th:each="tipo : ${tipos}" th:value="${tipo.idTipo}" th:text="${tipo.tipo}"></option>
+	                    </select>
+	                </div>
+	                <div class="capaerrores" id="aviso2">Olvidaste poner el tipo.</div>
+	            </div>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Temporada:</label>
+	                <div class="controls">
+	                    <select name="strTemporada" class="form-control" id="strTemporada">
+	                    	<option th:each="temporada : ${temporadas}" th:value="${temporada.idTemporada}" th:text="${temporada.descripcionT}"></option>
+	                    </select>
+	                </div>
+	                <div class="capaerrores" id="aviso3">Olvidaste poner la temporada.</div>
+	            </div>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Estado de origen:</label>
+	                <div class="controls">
+	                    <select name="strEstado" class="form-control" id="strEstado">
+	                        <option value="0">Selecciona tu estado</option>
+	                    </select>
+	                </div>
+	                <div class="capaerrores" id="aviso44">Olvidaste poner el estado.</div>
+	            </div>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Municipio de origen:</label>
+	                <div class="controls">
+	                    <select name="strMunicipio" class="form-control"  id="strMunicipio">
+	                        <option value="0">Selecciona tu municipio</option>
+	                    </select>
+	                </div>
+	                <div class="capaerrores" id="aviso4">Olvidaste poner el municipio.</div>
+	            </div>
+	            <div class="form-group">
+	                <div class="controls">
+	                    <textarea name="strDescripcion" class="form-control" placeholder="Descripcion" id="strDescripcion" required th:text="${producto.descripcion}"></textarea>
+	                </div>
+	                <div class="capaerrores" id="aviso5">Olvidaste la descripcion / Historia.</div>
+	            </div>
+	            <input type="hidden" name="id_pro_editeli" id="id_pro_editeli" th:value="${producto.idProducto}" />
+	        </fieldset>
+	    </div>
+	    <div class='modal-footer'>
+	        <input type='button' class='btn btn-default' data-dismiss='modal' value="Cerrar"/>
+	        <input type="button" class="btn btn-default" th:value="${action}" th:id="'AgregaProducto'+${actioncd}" />
+	    </div>
+	</form>
+	<div id="cargaimg"></div>
+	<script>
+	    (function(){
+	        function ValidarAddProd(){
+	            valid = true;
+	            $("#aviso1").hide("slow");
+	            $("#aviso2").hide("slow");
+	            $("#aviso3").hide("slow");
+	            $("#aviso4").hide("slow");
+	            $("#aviso44").hide("slow");
+	            $("#aviso5").hide("slow");
+	            document.formproducto.strNombrePro.style.border='1px solid #EEEEEE';
+	            document.formproducto.strTipoPro.style.border='1px solid #EEEEEE';
+	            document.formproducto.strTemporada.style.border='1px solid #EEEEEE';
+	            document.formproducto.strMunicipio.style.border='1px solid #EEEEEE';
+	            document.formproducto.strEstado.style.border='1px solid #EEEEEE';
+	            document.formproducto.strDescripcion.style.border='1px solid #EEEEEE';
+	
+	            if (document.formproducto.strNombrePro.value === ""){
+	                $("#aviso1").show("slow");
+	                document.formproducto.strNombrePro.style.border='1px solid red';
+	                valid = false;
+	            }
+	            if (document.formproducto.strTipoPro.value === ""){
+	                $("#aviso2").show("slow");
+	                document.formproducto.strTipoPro.style.border='1px solid red';
+	                valid = false;
+	            }
+	            if (document.formproducto.strTemporada.value === ""){
+	                $("#aviso3").show("slow");
+	                document.formproducto.strTemporada.style.border='1px solid red';
+	                valid = false;
+	            }
+	            if (document.formproducto.strEstado.value === ""){
+	                $("#aviso44").show("slow");
+	                document.formproducto.strEstado.style.border='1px solid red';
+	                valid = false;
+	            }
+	            if (document.formproducto.strMunicipio.value === ""){
+	                $("#aviso4").show("slow");
+	                document.formproducto.strMunicipio.style.border='1px solid red';
+	                valid = false;
+	            }
+	            if(CKEDITOR.instances['strDescripcion'].getData() === ""){
+	                $("#aviso5").show("slow");
+	                document.getElementById('strDescripcion').style.border = '1px solid red';
+	                value=false;
+	            }
+	            return valid;
+	        }
+	        
+	        
+	        
+	        $("#AgregaProducto0").click(function(){
+	            if(ValidarAddProd())
+	            {
+	                var nombre = document.formproducto.strNombrePro.value;
+	                var tipo = document.formproducto.strTipoPro.value;
+	                var tempo = document.formproducto.strTemporada.value;
+	                var estad = document.formproducto.strEstado.value;
+	                var munic = document.formproducto.strMunicipio.value;
+	                var user = document.formproducto.id_pro.value;
+	                var descri = CKEDITOR.instances['strDescripcion'].getData();
+	                                
+	                var carga ="cargaimg";
+	                
+	                var accion = "addprod";
+	                $.post("cnadminproductos",{
+	                    accion: accion,
+	                    nombre: nombre,
+	                    tipo: tipo,
+	                    municipio: munic,
+	                    estad: estad,
+	                    temporada: tempo,
+	                    descripcion: descri,
+	                    usuario: user
+	                },function(responseText){
+	                    if($.trim(responseText) === "1"){
+	                        getAjaxRecarga();
+	                        alertify.alert('Guissa','Producto agregado con éxito');
+	                        document.formproducto.strNombrePro.value="";
+	                        document.formproducto.strTipoPro.value="";
+	                        document.formproducto.strTemporada.value="";
+	                        document.formproducto.strMunicipio.value="";
+	                        document.formproducto.strEstado.value="";
+	                    }else{
+	                        alertify.alert('Guissa','El producto no se pudo agregar');
+	                    }
+	                });
+	            }
+	        });
+	        $("#AgregaProducto1").click(function(){
+	            if(ValidarAddProd())
+	            {
+	                var nombre = document.formproducto.strNombrePro.value;
+	                var tipo = document.formproducto.strTipoPro.value;
+	                var tempo = document.formproducto.strTemporada.value;
+	                var estad = document.formproducto.strEstado.value;
+	                var munic = document.formproducto.strMunicipio.value;
+	                var descri = CKEDITOR.instances['strDescripcion'].getData();
+	                var user = document.formproducto.id_pro.value;
+	                var idprod = document.formproducto.id_pro_editeli.value;
+	                
+	                var carga ="cargaimg";
+	                
+	                var accion = "editprod";
+	                $.post("cnadminproductos",{
+	                    accion: accion,
+	                    nombre: nombre,
+	                    tipo: tipo,
+	                    municipio: munic,
+	                    estad: estad,
+	                    temporada: tempo,
+	                    descripcion: descri,
+	                    usuario: user,
+	                    idprodcrud: idprod
+	                },function(responseText){
+	                    if($.trim(responseText) === "1"){
+	                        getAjaxRecarga();
+	                        alertify.alert('Guissa','Producto editado con éxito');
+	                    }else{
+	                        alertify.alert('Guissa','El producto no se pudo editar');
+	                    }
+	                });
+	            }
+	        });
+	        $("#AgregaProducto2").click(function(){
+	            var idprod = document.formproducto.id_pro_editeli.value;
+	            var ruta = "cnadminproductos?accion=elimprod&idprodcrud="+idprod;
+	                var carga ="cargaimg";
+	                $.ajax({
+	                    type: "POST",
+	                    url:ruta,
+	                    cache:false,
+	                    beforeSend:function(){
+	                        $("#"+carga).html("<img src='/guissa/administrador/img/lorde.gif'>");
+	                    },
+	                    success: function(resp){
+	                        $("#"+carga).html("");
+	                        if(resp==="1"){
+	                            getAjaxRecarga();
+	                            alertify.alert('Guissa','Producto eliminado con éxito');                         
+	                        }else{
+	                            alertify.alert('Guissa','El producto no se pudo eliminar');
+	                        }
+	                    }
+	                });
+	        });
+	        
+	        
+	        function getAjaxRecarga(){
+	            $.ajax({
+	                type: "post" ,
+	                url: "cnadminproductos?accion=getTall100",
+	                cache:false,
+	                beforeSend:function(){
+	                    $("#lstMuestra").html("<img src='/guissa/administrador/img/lorde.gif'>");
+	                },
+	                success: function(dato){
+	                    $("#lstMuestra").fadeOut("fast",function(){
+	                        $(this).html(dato).slideDown(10);
+	                    });
+	                },
+	                error: function(XMLHttpRequest,textStatus,errorthrows){
+	                    alert("Ocurrió un error: "+ errorthrows);
+	                }
+	            });
+	        }
+	        //lstMuestra
+	    })();
+	</script>
+	<script>
+	    (function () {
+	        var estad;
+		$.ajax({
+	            url: '/general/datos-est.json',
+	            dataType: "text",
+	            success: function(dataResponse) {
+			estad = JSON.parse(dataResponse);
+	                for( var i = 0; i < estad[0].estados.length; i++ ) {
+	                    document.getElementById("strEstado").innerHTML += "<option value='"+estad[0].estados[i].nombre+"'>"+estad[0].estados[i].nombre+"</option>";
+	                }
+	            }
+	        });
+		$("#strEstado").change(function(){
+	            $("#strMunicipio").empty();
+	            $("#strMunicipio").append('<option value="" selected="selected">Selecciona un municipio</option>');
+	            var esta_sel = $("#strEstado").val();
+	            $.ajax({
+			url: '/general/datos-est.json',
+	                dataType: "text",
+			success: function(dataResponse) {
+	                    var estad = JSON.parse(dataResponse);
+	                    for( var i = 0; i < estad[0].estados.length; i++ ) {
+				if(estad[0].estados[i].nombre===esta_sel){
+	                            for( var j = 0; j < estad[0].estados[i].municipios.length; j++ ) {
+					document.getElementById("strMunicipio").innerHTML += "<option value='"+estad[0].estados[i].municipios[j]+"'>"+estad[0].estados[i].municipios[j]+"</option>";
+	                            }
+				}
+	                    }
+			}
+	            });
+		});
+	        
+	    })();
+	</script>
 </html>

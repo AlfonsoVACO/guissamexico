@@ -27,7 +27,7 @@ import com.guissa.guissa.models.resources.LstAdminViews;
 import com.guissa.guissa.services.BannerService;
 
 @Controller
-@RequestMapping("/administracion/slides")
+@RequestMapping("/admins/slides")
 public class AdminSlidesController {
 	
 	@Autowired
@@ -51,7 +51,7 @@ public class AdminSlidesController {
 			lista_mbanner.add(modelo_banner);
 		}
 		model.addAttribute("listar", lista_mbanner);
-		return LstAdminViews.ADMIN_SLIDES_INDEX_VIEW.getString();
+		return LstAdminViews.ADMIN_SLIDES_INDEX_VIEW;
 	}
 	
 	@GetMapping("/crud")
@@ -69,7 +69,7 @@ public class AdminSlidesController {
 				model.addAttribute("estilo", 2);
 			}
 		}
-		return LstAdminViews.ADMIN_SLIDES_CRUD_VIEW.getString();
+		return LstAdminViews.ADMIN_SLIDES_CRUD_VIEW;
 	}
 	
 	@PostMapping("/delete/{id}")

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.guissa.guissa.models.entidades.User;
@@ -43,5 +44,10 @@ public class UserServiceImp implements UserService{
 	public void deleteUser(Integer id) {
 		userRepository.deleteById(id);
 		
+	}
+	
+	public User getUserByCriteria(Example<User> example) {
+		Optional<User> isNull = userRepository.findOne(example);
+		return isNull.isPresent() ? isNull.get() : new User();
 	}
 }

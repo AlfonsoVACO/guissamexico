@@ -1,73 +1,76 @@
-<h3><i class="fa fa-angle-right"></i> Productos</h3>		
-<div class="row mt">
-    <div class="col-md-12">
-        <section class="task-panel tasks-widget">
-            <div class="panel-heading">
-                <input id="addpro_vista" data-toggle='modal' onclick="cambiaventanaacciones('Pro','Agregar','formulariocrud','cnadminproductos','0','1')" data-target='#Producto' class="btn btn-info" type="button" value="Agregar"/>
-            </div>
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-6">
-                        <input id="bsqProductos" class="form-control" type="text" placeholder="Buscar" width="50%"/>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-body">
-                <div class="task-content">
-                    <ul class="task-list" id="lstMuestra">
-					    <hr style="border: 0.1px solid grey; " />
-					    <li>
-					        <div class="task-title">
-					            <span class="task-title-sp">gecha nombre estado</span>
-					            <div class="pull-right hidden-phone">
-					                <a href="javascript: getModal('datosm<%= i %>');" data-toggle='modal' data-target='#mensajemd<%= i %>' class="btn btn-info btn-xs"><i class=" fa fa-check"></i></a>
-					                <a onclick="cambiaventanaacciones('Pro','Imagen','formulariocrud','cnadminproductos','1','id');" data-toggle='modal' data-target='#Producto' title="Agregar imagen" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
-					                <a onclick="cambiaventanaacciones('Pro','Receta','formulariocrud','cnadminproductos','1','id');" data-toggle='modal' data-target='#Producto' title="Agregar receta" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-					                <a onclick="cambiaventanaacciones('Pro','Editar','formulariocrud','cnadminproductos','1','id');" data-toggle='modal' data-target='#Producto' class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-					                <a onclick="cambiaventanaacciones('Pro','Eliminar','formulariocrud','cnadminproductos','1','id');" data-toggle='modal' data-target='#Producto' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-					                <div class="modal fade modal-success" id="mensajemdid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					                    <div class="modal-dialog" role="document">
-					                        <div class="modal-content">
-					                            <div class="modal-header">
-					                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					                                <h4 class="modal-title" id="myModalLabel">Producto</h4>
-					                            </div>
-					                            <div class="modal-body">
-					                                <div class="gettamodal" id="datosm<%= i %>">
-					                                    <strong>Nombre: </strong>Nombre<br/>
-					                                    <strong>Tipo de producto: </strong>Tipo<br/>
-					                                    <strong>Temporada: </strong>Temporada<br/>
-					                                    <strong>Fecha: </strong>Fecha<br/>
-					                                    <strong>Estado: </strong>Estado<br/><br/>
-					                                    <strong>Municipio: </strong>Municipio<br/>
-					                                    <strong>Descripción: </strong><br/>Descipcion<br/>
-					                                    <strong>Subido por: </strong>Usuario<br/>
-					                                </div>
-					                            </div>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					    </li>
-						<div id="datosmuestraM"></div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Productos</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <input id="addpro_vista" data-toggle='modal' onclick="cambiaventanaacciones('get','add','formulariocrud','/admins/productos','0','1')" data-target='#Producto' class="btn btn-info" type="button" value="Agregar"/>
+	            </div>
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <input id="bsqProductos" class="form-control" type="text" placeholder="Buscar" width="50%"/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <ul class="task-list" id="lstMuestra">
+						    <li th:each="producto,iterator : ${productos}">
+						    	<hr style="border: 0.1px solid grey; " />
+						        <div class="task-title">
+						            <span class="task-title-sp">gecha nombre estado</span>
+						            <div class="pull-right hidden-phone">
+						                <a th:href="@{javascript: getModal('datosm__${iterator.index}__');}" data-toggle='modal' th:data-target="'#mensajemd' + ${iterator.index}" class="btn btn-info btn-xs"><i class=" fa fa-check"></i></a>
+						                <a th:onclick="@{cambiaventanaacciones('get','img','formulariocrud','/admins/productos','1','__${producto.idProducto}__');}" data-toggle='modal' data-target='#Producto' title="Agregar imagen" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+						                <a th:onclick="@{cambiaventanaacciones('get','rec','formulariocrud','/admins/productos','1','__${producto.idProducto}__');}" data-toggle='modal' data-target='#Producto' title="Agregar receta" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						                <a th:onclick="@{cambiaventanaacciones('get','edit','formulariocrud','/admins/productos','1','__${producto.idProducto}__');}" data-toggle='modal' data-target='#Producto' class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+						                <a th:onclick="@{cambiaventanaacciones('get','delete','formulariocrud','/admins/productos','1','__${producto.idProducto}__');}" data-toggle='modal' data-target='#Producto' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+						                <div class="modal fade modal-success" th:id="'mensajemd'+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header">
+						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						                                <h4 class="modal-title" id="myModalLabel">Producto</h4>
+						                            </div>
+						                            <div class="modal-body">
+						                                <div class="gettamodal" th:id="'datosm'+${iterator.index}">
+						                                    <strong>Nombre: </strong> <span th:text="${producto.nombre}"></span><br/>
+						                                    <strong>Tipo de producto: <span th:text="${producto.idTipo.tipo}"></span></strong>Tipo<br/>
+						                                    <strong>Temporada: </strong><span th:text="${producto.idTemporada.descripcionT}"></span>Temporada<br/>
+						                                    <strong>Fecha: </strong><span th:text="${producto.fechaH}"></span>Fecha<br/>
+						                                    <strong>Estado: </strong><span th:text="${producto.idEstado.nombre}"></span>Estado<br/><br/>
+						                                    <strong>Municipio: </strong><span th:text="${producto.idMunicipio.nombreMun}"></span>Municipio<br/>
+						                                    <strong>Descripci&oacute;n: </strong><br/><span th:text="${producto.descripcion}"></span>Descipcion<br/>
+						                                    <strong>Subido por: </strong><span th:text="${producto.idUser.nic}"></span>Usuario<br/>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </li>
+	                    </ul>
+	                    <div id="datosmuestraM"></div>
 						<div id="cargaProcesoMens"></div>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
-<div class="modal fade modal-danger" id="Producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Productos</h4>
-            </div>
-            <div id="formulariocrud"></div>
-        </div>
-    </div>
-</div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
+	<div class="modal fade modal-danger" id="Producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">Productos</h4>
+	            </div>
+	            <div id="formulariocrud"></div>
+	        </div>
+	    </div>
+	</div>
+</html>

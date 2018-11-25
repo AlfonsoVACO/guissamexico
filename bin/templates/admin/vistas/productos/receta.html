@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<script type="text/javascript">
+	    function subeb() {
+	        var valid = true;
+	        $("#avisoNR").hide("slow");
+	        $("#avisoRR").hide("slow");
+	                                    
+	        if (document.formRece.strNomR.value === ""){
+	            $("#avisoNR").show("slow");
+	            document.formRece.strNomR.style.border='1px solid red';
+	            valid = false;
+	        }
+	        if(CKEDITOR.instances['strRece'].getData() === ""){
+	            $("#avisoRR").show("slow");
+	            document.getElementById('strRece').style.border = '1px solid red';
+	            value=false;
+	        }
+	        return valid;
+	    }
+	</script>
+	<div th:>
+	</div>
+	<form action="" method="post" name="formRece" >
+	    <div class="modal-body">
+	        <fieldset>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Nombre de la receta:</label>
+	                <div class="controls">
+	                    <input name="strNomR" value="<%= producto.getRecetaList().get(producto.getRecetaList().size() - 1).getNombre() %>" type="text" class="form-control" id="strNomR" placeholder="Nombre">
+	                </div>
+	                <div class="capaerrores" id="avisoNR">Olvidaste el nombre.</div>
+	            </div>
+	            <hr>
+	            <div class="form-group">
+	                <div class="controls">
+	                    <textarea class="form-control" name="strRece" id="strRece" cols="5" rows="9"><%= producto.getRecetaList().get(producto.getRecetaList().size() - 1).getDescripcionreceta() %></textarea>
+	                </div>
+	                <div class="capaerrores" id="avisoRR">Olvidaste la receta</div>
+	            </div>
+	            <script>
+	                CKEDITOR.config.entities = false;
+	                CKEDITOR.replace( 'strRece' );
+	            </script>
+	            <input type="hidden"  name="id_pro_adR" id="id_pro_adR" value="<%= id %>">
+	            <input type="hidden"  name="id_serR" id="id_serR" value="<%= idUseraddp %>">
+	            <input type="hidden"  name="id_receta" id="id_receta" value="<%= producto.getRecetaList().get(producto.getRecetaList().size() - 1).getIdProducto().getIdProducto() %>">
+	            <div class="form-actions">
+	                <input type="button" name="nuevaimagen" class="btn btn-default" id="btnEditRec" value="Editar" />
+	            </div>
+	            <div class="capaexito" id="exitoRec">Agregado corectamente</div>
+	            <div class="capaerrores" id="avisoNSR">Error al subir</div>
+	        </fieldset>
+	    </div>
+	</form>
+	<script type="text/javascript">
+	    $("#btnEditRec").click(function () {
+	        $("#exitoRec").hide("slow");
+	        if(subeb()){
+	            var nombre = document.formRece.strNomR.value;
+	            var desc = CKEDITOR.instances['strRece'].getData();
+	            var idpro = document.formRece.id_pro_adR.value;
+	            var user = document.formRece.id_serR.value;
+	            var idrec = document.formRece.id_receta.value;
+	            var accion = "editareceta";
+	            $.post("cnadminproductos",{
+	                accion: accion,
+	                nombre: nombre,
+	                desc : desc,
+	                idpro: idpro,
+	                user: user,
+	                idrec: idrec
+	            },function(responseText){
+	                if($.trim(responseText) === "1"){
+	                    $("#exitoRec").show("slow");
+	                    document.formRece.strNomR.value="";
+	                    document.formRece.strRece.value="";
+	                }else{
+	                    $("#avisoNSR").show("slow");
+	                }
+	            });
+	        }
+	    });
+	</script>
+	<%
+	}else{
+	%>
+	<form action="" method="post" name="formRece" >
+	    <div class="modal-body">
+	        <fieldset>
+	            <div class="form-group">
+	                <label class="control-label" for="fileInput">Nombre de la receta:</label>
+	                <div class="controls">
+	                    <input name="strNomR" type="text" class="form-control" id="strNomR" placeholder="Nombre">
+	                </div>
+	                <div class="capaerrores" id="avisoNR">Olvidaste el nombre.</div>
+	            </div>
+	            <hr>
+	            <div class="form-group">
+	                <div class="controls">
+	                    <textarea class="form-control" name="strRece" id="strRece" cols="5" rows="9"></textarea>
+	                </div>
+	                <div class="capaerrores" id="avisoRR">Olvidaste la receta</div>
+	            </div>
+	            <script>
+	                CKEDITOR.config.entities = false;
+	                CKEDITOR.replace( 'strRece' );
+	            </script>
+	            <input type="hidden"  name="id_pro_adR" id="id_pro_adR" value="<%= id %>">
+	            <input type="hidden"  name="id_serR" id="id_serR" value="<%= idUseraddp %>">
+	            <div class="form-actions">
+	                <input type="button" name="nuevaimagen" class="btn btn-default" id="btnSubeRec" value="Agregar" />
+	            </div>
+	            <div class="capaexito" id="exitoRec">Agregado corectamente</div>
+	            <div class="capaerrores" id="avisoNSR">Error al subir</div>
+	        </fieldset>
+	    </div>
+	</form>
+	<script type="text/javascript">
+	    $("#btnSubeRec").click(function () {
+	        $("#exitoRec").hide("slow");
+	        if(subeb()){
+	            var nombre = document.formRece.strNomR.value;
+	            var desc = CKEDITOR.instances['strRece'].getData();
+	            var idpro = document.formRece.id_pro_adR.value;
+	            var user = document.formRece.id_serR.value;
+	            var accion = "addreceta";
+	            $.post("cnadminproductos",{
+	                accion: accion,
+	                nombre: nombre,
+	                desc : desc,
+	                idpro: idpro,
+	                user: user
+	            },function(responseText){
+	                if($.trim(responseText) === "1"){
+	                    $("#exitoRec").show("slow");
+	                    document.formRece.strNomR.value="";
+	                    document.formRece.strRece.value="";
+	                }else{
+	                    $("#avisoNSR").show("slow");
+	                }
+	            });
+	        }
+	    });
+	</script>
+</html>

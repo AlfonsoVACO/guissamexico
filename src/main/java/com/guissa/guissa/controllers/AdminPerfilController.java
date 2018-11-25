@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/administracion/perfil")
+@RequestMapping("/admins/perfil")
 public class AdminPerfilController {
 
 }

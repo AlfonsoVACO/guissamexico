@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Notas</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <style type="text/css">
+			    .chat ul {
+				list-style: none;
+				margin: -15px;
+				padding: 15px;
+			    }
+			
+			    .chat ul li {
+			            margin-bottom: 10px;
+			            padding: 15px 5px;
+			            border-bottom: 1px solid #eee;
+			    }
+			
+			    .chat ul li.left .chat-body { margin-left: 100px;}
+			    .chat ul li.right .chat-body { margin-right: 100px;}
+			
+			    .chat ul li .chat-body p {
+			            margin: 0;
+			    }
+			
+			    .chat ul .glyphicon {
+			            margin-right: 5px;
+			    }
+			
+			    .chat .panel-body {
+			            overflow-y: scroll;
+			            height: 300px;
+			    }
+			
+			    .chat-body small {
+			            margin-left: 5px;
+			    }
+			</style>
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-10">
+	                        <h4><p>Aqu&iacute; se listan las tareas pendientes de administradores, 
+	                                si puede realizarlas, despu&eacute;s de eso, favor de eliminarlas.</p></h4>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <div class="task-list" id="lstMuestra">
+	                    	<div class="panel panel-warning chat">
+							    <div class="panel-heading" id="accordion">
+							        Chat
+							    </div>				
+							    <div class="panel-body">
+							        <ul>
+							            <li th:each="nota,item : ${notas}" th:class="${nota.idUser.idUser} == ${usuario.idUser} ? 'right clearfix' : 'left clearfix'" th:id="'listachar'+${item.index}">
+							                <span class="left clearfix">
+							                    <a th:href="@{javascript: exedell('listachar__${item.index}__','__${nota.idNota}__');}" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							                        <span aria-hidden="true">&times;</span>
+							                    </a>
+							                </span>
+							                <span th:class="${nota.idUser.idUser} == ${usuario.idUser} ? 'chat-img pull-right' : 'chat-img pull-left'">
+							                    <img height="20%" width="20%" src="<%= lista.get(i).getIdUser().getAvatar() %>" alt="User Avatar" class="img-circle" />
+							                </span>
+							                <div class="chat-body clearfix">
+							                    <div class="">
+							                        <strong class="primary-font" th:text="${nota.idUser.nic}"></strong> <small class="text-muted" th:text="${nota.fecha}"></small>
+							                    </div>
+							                    <p th:text="${nota.nota}"></p>
+							                </div>
+							            </li>
+							            <div id='chat-add'></div>
+							        </ul>
+							    </div>					
+							    <div class="panel-footer">
+							        <div class="input-group">
+							            <input type="hidden" name="id_nota" id="id_nota" th:value="${usuario.idUser}" />
+							            <input id="btn-input" type="text" class="form-control input-md" placeholder="Ingresa tu nota aqu&iacute;..." />
+							            <span class="input-group-btn">
+							                <input class="btn btn-success btn-md" id="btn-chat" value="Enviar" />
+							            </span>
+							        </div>
+							    </div>
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
+	<div class="modal fade modal-danger" id="Nota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">Notas</h4>
+	            </div>
+	            <div id="formulariocrud"></div>
+	        </div>
+	    </div>
+	</div>
 </html>

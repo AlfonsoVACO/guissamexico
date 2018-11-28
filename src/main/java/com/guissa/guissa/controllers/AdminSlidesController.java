@@ -34,7 +34,7 @@ public class AdminSlidesController {
 	@Qualifier("servicioBanner")
 	private BannerService servicioBanner;	
 	
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index(Model model) {
 		List<MBanner> lista_mbanner = new ArrayList<MBanner>();
 		List<Banner> lista_banner = servicioBanner.listAllBanner();

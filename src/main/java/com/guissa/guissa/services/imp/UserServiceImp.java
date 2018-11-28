@@ -46,6 +46,7 @@ public class UserServiceImp implements UserService{
 		
 	}
 	
+	@Override
 	public User getUserByCriteria(Example<User> example) {
 		Optional<User> isNull = userRepository.findOne(example);
 		return isNull.isPresent() ? isNull.get() : new User();

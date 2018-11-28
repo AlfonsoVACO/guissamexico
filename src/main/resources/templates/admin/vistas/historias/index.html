@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Historias</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <input id="bsqhistorias" data-search="historias" class="form-control" type="text" placeholder="Buscar" width="50%"/>
+	                        <input type="button" id="buscahisyory" class="btn btn-success" value="Buscar"/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <ul class="task-list" id="lstMuestra">
+	                    	<li class="alert-danger" th:each="historia,item : ${historias}">
+						        <div class="task-title">
+						            <span class="task-title-sp" th:text="${historia.nombre} + ' ==> ' + ${historia.tipo}"></span>
+						            <div class="pull-right hidden-phone">
+						                <a th:href="@{javascript: getModal('datosm__${item.index}__');}" data-toggle='modal' th:data-target="'#historymd'+${item.index}" class="btn btn-success btn-xs"><i class=" fa fa-check"></i></a>
+						                <a th:href="@{javascript: crudHistorys('mar','__${historia.idHistory}__');}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						                <a th:href="@{javascript: crudHistorys('del','__${historia.idHistory}__');}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+						                <div class="modal fade modal-success" th:id="'historymd'+${item.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header">
+						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						                                <h4 class="modal-title" id="myModalLabel">Historia</h4>
+						                            </div>
+						                            <div class="modal-body">
+						                                <div class="gettamodal" id="datosm<%= i %>">
+						                                    <strong>Nombre: </strong><span th:text="${historia.nombre}"></span><br/>
+						                                    <strong>Producto: </strong><span th:text="${historia.nombreH}"></span><br/>
+						                                    <strong>Temporada: </strong><span th:text="${historia.temporada}"></span><br/><br/>
+						                                    <strong>Tipo: </strong><span th:text="${historia.tipo}"></span><br/>
+						                                    <strong>Municipio: </strong><span th:text="${historia.municipio}"></span><br/>
+						                                    <strong>Descripci&oacute;n: </strong><span th:text="${historia.descripcion}"></span><br/>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </li>
+	                    </ul>
+	                    <div id="datosmuestraM"></div>
+	                    <div id="cargaProcesoMens"></div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
 </html>

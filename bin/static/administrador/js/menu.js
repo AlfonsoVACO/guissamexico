@@ -18,6 +18,29 @@ function getItem(item) {
     });
 }
 
+$("input[data-search]").on("keypress",function( e ){
+	if(e.which === 13){
+	var url = $(this).attr("data-search");
+		$.ajax({
+	        type: "get",
+	        url: "/admins/" + url +"/search",
+	        data: $(this).val(),
+	        cache: false,
+	        beforeSend: function () {
+	            $("#lstMuestra").html("<img src='/administrador/img/lorde.gif'>");
+	        },
+	        success: function (dato) {
+	            $("#lstMuestra").fadeOut("fast", function () {
+	                $(this).html(dato).slideDown(10);
+	            });
+	        },
+	        error: function (XMLHttpRequest, textStatus, errorthrows) {
+	            alert("Ocurrió un error: " + errorthrows);
+	        }
+	    });
+	}
+});
+
 function crudHistorys(crud, id) {
     if ($.trim(crud) === "mar") {
         ajaxHistorys("cnadminhistorias?enter=marcaHistory&id=" + id, "marcada");

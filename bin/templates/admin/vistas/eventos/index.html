@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Eventos</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <input id="addpro_vista" data-toggle='modal' onclick="cambiaventanaacciones('get','add','formulariocrud','/admins/eventos','0','1')" data-target='#Evento' class="btn btn-info" type="button" value="Agregar"/>
+	            </div>
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <input id="bsqEventos" data-search="eventos" class="form-control" type="text" placeholder="Buscar" width="50%"/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <ul class="task-list" id="lstMuestra">
+	                    	<li th:each="evento,item : ${eventos}">
+						        <div class="task-title">
+						            <span class="task-title-sp" th:text="${evento.nombre} +'  '+ ${evento.idEstado.nombre}"></span>
+						            <div class="pull-right hidden-phone">
+						                <a th:href="@{javascript: getModal('datosm__${item.index}__');}" data-toggle='modal' th:data-target="'#mensajemd'+${item.index}" class="btn btn-success btn-xs" title="Ver"><i class=" fa fa-check"></i></a>
+						                <a onclick="@{cambiaventanaacciones('get','edit','formulariocrud','/admins/eventos','1','__${evento.idEvento}__');}" data-toggle='modal' data-target='#Evento' class="btn btn-primary btn-xs" title="Editar"><i class="fa fa-pencil"></i></a>
+						                <a onclick="@{cambiaventanaacciones('get','delete','formulariocrud','/admins/eventos','1','__${evento.idEvento}__');}" data-toggle='modal' data-target='#Evento' class="btn btn-danger btn-xs" title="Eliminar"><i class="fa fa-trash-o "></i></a>
+						                <div class="modal fade modal-success" th:id="'mensajemd'+${item.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header">
+						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						                                <h4 class="modal-title" id="myModalLabel">Negocio</h4>
+						                            </div>
+						                            <div class="modal-body">
+						                                <div class="gettamodal" th:id="'datosm'+${item.index}">
+						                                    <strong>Nombre: </strong><span th:text="${evento.nombre}"></span><br/>
+						                                    <strong>Estado: </strong><span th:text="${evento.idEstado.nombre}"></span><br/><br/>
+						                                    <strong>Municipio: </strong><span th:text="${evento.idMunicipio.nombreMun}"></span><br/>
+						                                    <strong>Fecha de inicio: </strong><span th:text="${evento.fechaI}"></span><br/>
+						                                    <strong>Fecha de termino: </strong><span th:text="${evento.fechaF}"></span><br/>
+						                                    <strong>Descripción: </strong><br/><span th:text="${evento.descripcion}"></span><br/>
+						                                    <img height="50%" width="50%" th:src="@{data:image/jpeg;base64,__${evento.idImagen.imagen}__}" /><br/>
+						                                    <strong>Administrador: </strong><span th:text="${evento.idUser.nombre} + ' ' + ${evento.idUser.apellidos}"></span><br/>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </li>
+	                    </ul>
+	                    <div id="datosmuestraM"></div>
+						<div id="cargaProcesoMens"></div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>	
+	<div class="modal fade modal-danger" id="Evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title" >Eventos</h4>
+	            </div>
+	            <div id="formulariocrud"></div>
+	        </div>
+	    </div>
+	</div>
 
-</body>
 </html>

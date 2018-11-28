@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Patrocinadores</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <form enctype="multipart/form-data" class="form-horizontal" id="ajaxpatro">
+	                            <div class="form-group">
+	                                <label class="control-label">Nombre:</label>
+	                                <div class="controls">
+	                                    <input name="strNombrePat" type="text" class="form-control" id="strNombrePat" placeholder="Nombre" />
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="control-label">Localizaci&oacute;n:</label>
+	                                <div class="controls">
+	                                    <input name="strLocaliPat" type="text" class="form-control" id="strLocaliPat" placeholder="Localización" />
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="control-label">Web:</label>
+	                                <div class="controls">
+	                                    <input name="strWebPatroc" type="text" class="form-control" id="strWebPatroc" placeholder="Web" />
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="control-label">Imagen:</label>
+	                                <div class="controls">
+	                                    <input type="file" name="miArchivo" />
+	                                    <input type="hidden" name="id_user_pat" value="<%= idUseraddp %>" />
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <input type="submit" name="nuevaimagen" class="btn btn-success" value="Agregar" />
+	                            </div>
+	                            <div class="capaexito" id="exiGale">Patrocinador agregado correctamente</div>
+	                            <div class="capaerrores" id="errGale">Tenemos un error para agregar un patrocinador</div>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <div class="task-list" id="lstMuestra">
+	                    	<table class='table' >
+							    <thead>
+							    	<tr>
+								        <th>Nombre</th>
+								        <th>Localizaci&oacute;n</th>
+								        <th>Web</th>
+								        <th>Imagen</th>
+								        <th>Acción</th>
+							        </tr>
+							    </thead>
+								<tbody>
+								    <tr th:each="patrocinador, item : ${patrocinadores}" th:id="'deletc'+${item.index}">
+								        <td th:text="${patrocinador.nombre}"></td>
+								        <td th:text=${patrocinador.localizacion}></td>
+								        <td th:text="${patrocinador.web}"></td>
+								        <td>
+								            <img class="avatar border-gray" th:src="@{data:image/jpeg;base64,__${patrocinador.imagen}__}" /><br/>
+								        </td>
+								        <td>
+								            <div th:id="'deletr'+${item.index}">
+								                <a th:href="@{javascript: controlpatrocina('eliminar','deletc__${item.index}__','__${patrocinador.idPatrocinador}__');}" class="btn btn-danger">Eliminar</a>
+								            </div>
+								        </td>
+								    </tr>
+							    </tbody>
+							</table>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
 </html>

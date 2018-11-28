@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.guissa.guissa.models.entidades.Negocios;
@@ -40,7 +41,11 @@ public class NegociosServiceImp implements NegociosService{
 
 	@Override
 	public void deleteNegocios(Integer id) {
-		negociosRepository.deleteById(id);
-		
+		negociosRepository.deleteById(id);		
+	}
+	
+	@Override
+	public List<Negocios> getNegociosByCriteria(Example<Negocios> example) {
+		return negociosRepository.findAll(example);
 	}
 }

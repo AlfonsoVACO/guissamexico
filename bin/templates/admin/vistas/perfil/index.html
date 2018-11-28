@@ -1,10 +1,275 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Perfil</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <label><input type="checkbox" id="CambiaC" />Cambiar contraseña</label>      |
+	                <label><input type="checkbox" id="CambiaN" />Cambiar Nick</label>         |
+	                <label><input type="checkbox" id="CambiaD" />Cambiar Nombre y apellidos</label><br/>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <ul class="task-list" id="lstMuestra"></ul>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
+	
+	<div class="box span12">
+	    <div  id="perfil"></div>
+	</div>
+	<div class="box span12">
+	    <div id="EditaContra" style="display: none;">
+	        <script type="text/javascript">
+	            function CambioContra() {
+	                valid=true;
+	                $("#ONC").hide("slow");
+	                $("#ORNC").hide("slow");
+	                $("#CNC").hide("slow");
+	                document.formEC.newC.style.border='1px solid #EEEEEE';
+	                document.formEC.newCR.style.border='1px solid #EEEEEE';
+	                if (document.formEC.newC.value === ""){
+	                    $("#ONC").show("slow");
+	                    document.formEC.newC.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                if (document.formEC.newCR.value === ""){
+	                    $("#ORNC").show("slow");
+	                    document.formEC.newCR.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                if (document.formEC.newCR.value !== document.formEC.newC.value){
+	                    $("#CNC").show("slow");
+	                    document.formEC.newCR.style.border='1px solid red';
+	                    document.formEC.newC.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                return valid;
+	            }
+	        </script>
+	        <form name="formEC" >
+	            <fieldset>
+	                <div class="col-md-5">
+	                    <div class="form-group">
+	                        <input type="password" name="newC" placeholder="Nueva Contraseña " class="form-control"></input>
+	                        <div class="capaerrores" id="ONC">No has agregado la nueva contraseña.</div>
+	                    </div>
+	                    <div class="form-group">
+	                        <input type="password" name="newCR" placeholder="Repite tu nueva contraseña" class="form-control"></input>
+	                        <div class="capaerrores" id="ORNC">No has repetido la nueva contraseña.</div>
+	                        <div class="capaerrores" id="CNC">Las nuevas contraseñas no coinciden.</div>
+	                    </div>
+	                    <div class="form-group">
+	                        <input type="button" value="Cambiar" id="ActualContra" class="btn btn-success"></input>
+	                        <div class="capaexito" id="CCC">Se ha cambiado la contraseña correctamente.</div>
+	                        <div class="capaerrores" id="CCE">No se pudo cambiar la contraseña.</div>
+	                    </div>
+	                </div>
+	            </fieldset>
+	        </form>
+	    </div>
+	</div>
+	<div class="box span12">
+	    <div id="EditaNic" style="display: none;">
+	        <script type="text/javascript">
+	            function CambioNic() {
+	                valid=true;
+	                $("#ONN").hide("slow");
+	                document.formEN.newN.style.border='1px solid #EEEEEE';
+	                if (document.formEN.newN.value === ""){
+	                    $("#ONN").show("slow");
+	                    document.formEN.newN.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                return valid;
+	            }
+	        </script>
+	        <form name="formEN">
+	            <div class="col-md-5">
+	                <div class="form-group">
+	                    <input type="text" name="newN" placeholder="Nuevo Nic" class="form-control"></input>
+	                    <div class="capaerrores" id="ONN">No has agregado el nuevo nic.</div>
+	                </div>
+	                <div class="form-group">
+	                    <input type="button" value="Cambiar" id="ActualNic" class="btn btn-success"></input>
+	                    <div class="capaexito" id="NCC">Se ha cambiado el nic correctamente.</div>
+	                    <div class="capaerrores" id="NCE">No se pudo cambiar el nic.</div>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+	<div class="box span12">
+	    <div id="EditaDat" style="display: none;">
+	        <script type="text/javascript">
+	            function CambioDatos() {
+	                valid=true;
+	                $("#ONNo").hide("slow");
+	                $("#ONAp").hide("slow");
+	                document.formED.newNo.style.border='1px solid #EEEEEE';
+	                document.formED.newApe.style.border='1px solid #EEEEEE';
+	                if (document.formED.newNo.value === ""){
+	                    $("#ONNo").show("slow");
+	                    document.formED.newNo.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                if (document.formED.newApe.value === ""){
+	                    $("#ONAp").show("slow");
+	                    document.formED.newApe.style.border='1px solid red';
+	                    valid = false;
+	                }
+	                return valid;
+	            }
+	        </script>
+	        <form name="formED">
+	            <div class="col-md-5">
+	                <div class="form-group">
+	                    <input type="text" name="newNo" placeholder="Nuevo Nombre" class="form-control"></input>
+	                    <div class="capaerrores" id="ONNo">No has agregado el nuevo nombre.</div>
+	                </div>
+	                <div class="form-group">
+	                    <input type="text" name="newApe" placeholder="Nuevos Apellidos" class="form-control"></input>
+	                    <div class="capaerrores" id="ONAp">No has agregado lon nuevos apellidos.</div>
+	                </div>
+	                <div class="form-group">
+	                    <input type="button" id="EditaDatos" value="Cambiar" class="btn btn-success"></input>
+	                    <div class="capaexito" id="DCC">Se ha cambiado los datos correctamente.</div>
+	                    <div class="capaerrores" id="DCE">No se pudieron cambiar los datos.</div>
+	                    <input type="hidden" id="id-new-id-user" value="<%= idUser %>"/>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+	<script type="text/javascript">
+	    $("#CambiaC").change(function (){
+	        document.getElementById('CambiaN').checked=false;
+	        document.getElementById('CambiaD').checked=false;
+	        $("#perfil").hide("slow");
+	        if(document.getElementById('CambiaC').checked){
+	            $("#EditaContra").show("slow");
+	            $("#EditaNic").hide("slow");
+	            $("#EditaDat").hide("slow");
+	        }else{            
+	            $("#perfil").show("slow");
+	            $("#EditaContra").hide("slow");
+	        }
+	    });//EditaNic
+	    $("#CambiaN").change(function (){
+	        document.getElementById('CambiaC').checked=false;
+	        document.getElementById('CambiaD').checked=false;
+	        $("#perfil").hide("slow");
+	        if(document.getElementById('CambiaN').checked){
+	            $("#EditaNic").show("slow");
+	            $("#EditaDat").hide("slow");
+	            $("#EditaContra").hide("slow");
+	        }else{            
+	            $("#perfil").show("slow");
+	            $("#EditaNic").hide("slow");
+	        }
+	    });//EditaDat
+	    $("#CambiaD").change(function (){
+	        document.getElementById('CambiaN').checked=false;
+	        document.getElementById('CambiaC').checked=false;
+	        $("#perfil").hide("slow");
+	        if(document.getElementById('CambiaD').checked){
+	            $("#EditaDat").show("slow");
+	            $("#EditaNic").hide("slow");
+	            $("#EditaContra").hide("slow");
+	        }else{            
+	            $("#perfil").show("slow");
+	            $("#EditaDat").hide("slow");
+	        }
+	    });
+	</script>
+	<script type="text/javascript">
+	    //perfil
+	    function getDatosSeccion(){
+	        $.ajax({ // cliente
+	            type: "post" ,
+	            url:"/guissa/cnadminperfil",
+	            data: 'enter=cargaData&idusu=<%= idUser %>',
+	            cache:false,
+	            success: function(dato){
+	                $("#perfil").fadeOut("fast",function(){
+	                    $(this).html(dato).slideDown(10);
+	                });
+	            },
+	            error: function(XMLHttpRequest,textStatus,errorthrows){
+	                alert("Ocurrió un error: "+ errorthrows);
+	            }
+	        });
+	    }
+	    getDatosSeccion();
+	    $("#ActualContra").click(function(){
+	        $("#CCC").hide("slow");
+	        $("#CCE").hide("slow");
+	        if(CambioContra()){
+	            var cont = document.formEC.newC.value;
+	            var rcon = document.formEC.newCR.value;
+	            var idc = document.getElementById('id-new-id-user').value;
+	            $.ajax({
+	                type: "POST",
+	                url:"/guissa/cnadminperfil",
+	                data: 'enter=editContra&contra='+cont+'&rcon='+rcon+'&idusu='+idc,
+	                success: function(resp){  
+	                    if(resp==="1"){
+	                        $("#CCC").show("slow");
+	                    }else{
+	                        $("#CCE").show("slow");
+	                    }
+	                }
+	            });
+	        }
+	    });
+	    
+	    $("#ActualNic").click(function () {
+	        $("#NCC").hide("slow");
+	        $("#NCE").hide("slow");
+	        if(CambioNic()){
+	            var nic = document.formEN.newN.value;
+	            var idn = document.getElementById('id-new-id-user').value;
+	            $.ajax({
+	                type: "POST",
+	                url:"/guissa/cnadminperfil",
+	                data: 'enter=editNick&nic='+nic+'&idusu='+idn,
+	                success: function(resp){  
+	                    if(resp==="1"){
+	                        $("#NCC").show("slow");
+	                        document.formEN.newN.value="";
+	                    }else{
+	                        $("#NCE").show("slow");
+	                    }
+	                }
+	            });
+	        }
+	    });
+	    
+	    $("#EditaDatos").click(function () {
+	        $("#DCC").hide("slow");
+	        $("#DCE").hide("slow");
+	        if(CambioDatos()){
+	            var nom = document.formED.newNo.value;
+	            var ape = document.formED.newApe.value;
+	            var idd = document.getElementById('id-new-id-user').value;
+	            $.ajax({
+	                type: "POST",
+	                url:"/guissa/cnadminperfil",
+	                data: 'enter=editDatos&nombre='+nom+'&apell='+ape+'&idusu='+idd,
+	                success: function(resp){  
+	                    if(resp==="1"){
+	                        $("#DCC").show("slow");
+	                        document.formED.newNo.value="";
+	                        document.formED.newApe.value="";
+	                    }else{
+	                        $("#DCE").show("slow");
+	                    }
+	                }
+	            });
+	        }
+	    });
+	</script>
 </html>

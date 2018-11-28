@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Pedidos</h3>		
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <div class="form-group">
+	                            <label>Alguna palabra</label>
+	                            <input id="bsqPedidosI" class="form-control" type="text" width="40%"/>
+	                        </div>
+	                        <div class="form-group">
+	                            <input id="bsqPedidos" class="btn btn-info" type="button" value="Buscar"/>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <ul class="task-list" id="lstMuestra">
+	                    	<li th:each="pedido,item : ${pedidos}" th:id="'pedidolstdell'+${item.index}">
+						        <div class="task-title">
+						            <span class="task-title-sp" th:text="${pedido.nombre} + ' ==> '+ ${pedido.idEstado.nombre}"></span>
+						            <div class="pull-right hidden-phone">
+						                <a th:href="@{javascript: getModal('datosm__${item.index}__');}" data-toggle='modal' th:data-target="'#mensajemd'+${item.index}" class="btn btn-success btn-xs"><i class=" fa fa-check"></i></a>
+						                <a th:onclick="@{cambiaventanaacciones('get','message','formulariocrud','/admins/pedidos','1','__${pedido.idNegocio}__');}" data-toggle='modal' data-target='#Pedidos' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						                <a th:onclick="@{eliminaPedido('eliminar','pedidolstdell__${item.index}__','__${pedido.idNegocio}__');}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+						                <div class="modal fade modal-success" th:id="'mensajemd'+${item.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header">
+						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						                                <h4 class="modal-title">Pedido</h4>
+						                            </div>
+						                            <div class="modal-body">
+						                                <div class="gettamodal" th:id="'datosm'+${item.index}">
+						                                    <strong>Nombre: </strong><span th:text="${pedido.nombre}"></span><br/>
+						                                    <strong>Direcci&oacute;n: </strong><span th:text="${pedido.direccion}"></span><br/>
+						                                    <strong>Tel&eacute;fono: </strong><span th:text="${pedido.telefono}"></span><br/>
+						                                    <strong>Tel&eacute;fono (Opcional): </strong><span th:text="${pedido.oTelefono}"></span><br/>
+						                                    <strong>Estado: </strong><span th:text="${pedido.idEstado.nombre}"></span><br/><br/>
+						                                    <strong>Municipio: </strong><span th:text="${pedido.idMunicipio.nombreMun}"></span><br/>
+						                                    <strong>Descripci&oacute;n: </strong><br/><span th:text="${pedido.descripcion}"></span><br/>
+						                                    <strong>Tipo de compra: </strong><br/><span th:text="${pedido.visualizacion}"></span><br/>
+						                                    <strong>Vinculado al correo: </strong><span th:text="${pedido.correo}"></span><br/>
+						                                    <strong>Precio a pagar: </strong><span th:text="${pedido.idPrecio.precio}"></span><br/><br/>
+						                                    <p><a th:href="@{javascript: setDelibery('__${pedido.idNegocio}__');}" class="btn btn-warning">Liberar</a> <p>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
+	<div class="modal fade modal-danger" id="Pedidos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title">Pedidos</h4>
+	            </div>
+	            <div id="formulariocrud"></div>
+	        </div>
+	    </div>
+	</div>
 </html>

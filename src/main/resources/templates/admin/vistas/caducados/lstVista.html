@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">	
+	<li th:each="caducado,item : ${caducados}">
+		<div class="task-title">
+			<span class="task-title-sp" th:text="${caducado.nombre} + '  ' + ${caducado.idEstado.nombre}"></span>
+			<div class="pull-right hidden-phone">
+				<a th:onclick="@{setNew('1','__${caducado.idNegocio}__');}" class="btn btn-warning btn-xs" title="1 mes Básico"><i class="fa fa-check"></i></a>
+				<a th:onclick="@{setNew('3','__${caducado.idNegocio}__');}" class="btn btn-warning btn-xs" title="1 año Básico"><i class="fa fa-check"></i></a>
+				<a th:onclick="@{setNew('2','__${caducado.idNegocio}__');}" class="btn btn-warning btn-xs" title="1 mes premium"><i class="fa fa-check"></i></a>
+				<a th:onclick="@{setNew('4','__${caducado.idNegocio}__');}" class="btn btn-warning btn-xs" title="1 año premium"><i class="fa fa-check"></i></a>
+			</div>
+		</div>
+	</li>
+</html>

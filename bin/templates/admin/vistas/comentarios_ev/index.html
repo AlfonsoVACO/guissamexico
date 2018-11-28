@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:score="http://thymeleafexamples">
+	<h3><i class="fa fa-angle-right"></i> Comentarios de eventos</h3>
+	<div class="row mt">
+	    <div class="col-md-12">
+	        <section class="task-panel tasks-widget">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <input id="bsqComentE" data-search="comentariose" class="form-control" type="text" placeholder="Buscar" width="50%"/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="panel-body">
+	                <div class="task-content">
+	                    <div class="task-list" id="lstMuestra">
+	                    	<table class='table' >
+							    <thead>
+							    	<tr>
+								        <th>Fecha</th>
+								        <th>Opini&oacute;n</th>
+								        <th>Respuestas</th>
+								        <th>Acci&oacute;n</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+								    <tr th:each="comentario,item : ${comentariose}" th:id="'deletc'+${item.index}">
+								        <td th:text="${comentario.fecha}"></td>
+								        <td th:text="${comentario.comentario}"></td>
+								        <td>
+								            <div th:each="replica : ${comentario.replicaeList}"  th:id="'deletr'+${item.index}"> 
+								                <span class='comment-date' th:text="${replica.fecha}"></span>
+								                <p th:text="${replica.replica}"></p>
+								                <a th:href="@{javascript: controlcomente('eliminarR','deletr__${item.index}__','__${replica.idReplica}__');}" class="btn btn-danger">Eliminar</a>
+								            </div>
+								        </td>
+								        <td>
+								            <a th:href="@{javascript: controlcomente('eliminarO','deletc__${item.index}__','__${comentario.idComentario}__');}" class="btn btn-danger">Eliminar</a>
+								        </td>
+								    </tr>
+							    </tbody>
+							</table>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	    </div>
+	</div>
 </html>

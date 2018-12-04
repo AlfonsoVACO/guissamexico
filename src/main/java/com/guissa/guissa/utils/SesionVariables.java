@@ -16,7 +16,10 @@ public class SesionVariables {
 	
 	public static UserDetails sesionDetails() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return (principal instanceof UserDetails) ? (UserDetails) principal : null;
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails)
+			userDetails = (UserDetails) principal;
+		return userDetails;
 	}
 	
 	public static User sesionUsuario() {
@@ -25,7 +28,8 @@ public class SesionVariables {
 				new ExamplesClass<>(
 						new User(),
 						new Object[] { "correo", datail.getUsername() }
-				);		
+				);
+		System.out.println(datail.getUsername());
 		return servicioUsers.getUserByCriteria(examplesUser.getExample());
 	}
 }
